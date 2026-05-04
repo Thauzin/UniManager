@@ -1078,4 +1078,17 @@
     exports.initAccessibility = initAccessibility;
 
 }));
+
+function toggleSenha() {
+    const input = document.getElementById("senha");
+    const icon = document.getElementById("iconSenha");
+
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.replace("bi-eye", "bi-eye-slash");
+    } else {
+        input.type = "password";
+        icon.classList.replace("bi-eye-slash", "bi-eye");
+    }
+}
 //# sourceMappingURL=adminlte.js.map

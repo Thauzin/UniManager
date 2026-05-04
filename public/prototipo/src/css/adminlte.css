@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 /*!
  *   AdminLTE v4.0.0-rc7
@@ -15623,6 +15624,19 @@ fieldset legend {
   .app-footer {
     position: static !important;
   }
+}
+/* .bg-login {
+  background: #337AB7 !important;
+  background: linear-gradient(55deg, rgba(51, 122, 183, 1) 21%, rgba(163, 209, 103, 1) 64%, rgba(253, 198, 71, 1) 100%) !important;
+} */
+
+.eye-icon {
+  position: absolute;
+  right: 55px;
+  top: 54%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 10;
 }
 
 /*# sourceMappingURL=adminlte.css.map */

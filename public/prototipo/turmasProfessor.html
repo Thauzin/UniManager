@@ -134,7 +134,7 @@
                         </div>
                         <div class="col-sm-12">
                             <!--begin::Quick Example-->
-                            <div class="card card-dark card-outline mb-4 w-25">
+                            <div class="card card-dark card-outline mb-4 col-md-6 col-6">
                                 <!--begin::Header-->
                                 <div class="card-header">
                                     <div class="card-title">Engenharia de Software 5S</div>
@@ -154,12 +154,13 @@
                                     </div>
                                     <!--end::Body-->
                                     <!--begin::Footer-->
-                                    <div class="card-footer d-flex">
-                                        <button type="submit" class="btn btn-dark">Ver Alunos</button>
+                                    <div class="card-footer d-flex flex-wrap gap-2">
+                                        <button type="submit" class="btn btn-dark col-6">Ver Alunos</button>
                                         <div>
                                             <input class="ps-4" type="file" id="arquivo" hidden>
-                                            <label for="arquivo" class="btn btn-dark ms-3">Material</label>
+                                            <label for="arquivo" class="btn btn-primary ms-3">Adicionar Material</label>
                                         </div>
+
 
                                     </div>
                                     <!--end::Footer-->
@@ -168,61 +169,94 @@
                             </div>
                         </div>
                         <!--end::Row-->
-                    </div>
-                    <!--end::Container-->
-                </div>
-                <br>
-                <!--end::App Content Header-->
-                <!--begin::App Content-->
-                <div class="app-content">
-                    <!--begin::Container-->
-                    <div class="container-fluid">
-                        <!--begin::Row-->
-                        <div class="row g-4">
-                            <!--begin::Col-->
-                            <div class="app-content">
-                                <!--begin::Container-->
-                                <div class="container-fluid">
-                                    <!--begin::Row-->
-                                    <!-- /.card -->
-
-                                    <!--begin::JavaScript-->
-                                    <script>
-                                        // Example starter JavaScript for disabling form submissions if there are invalid fields
-                                        (() => {
-                                            'use strict';
-
-                                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                                            const forms = document.querySelectorAll('.needs-validation');
-
-                                            // Loop over them and prevent submission
-                                            Array.from(forms).forEach((form) => {
-                                                form.addEventListener(
-                                                    'submit',
-                                                    (event) => {
-                                                        if (!form.checkValidity()) {
-                                                            event.preventDefault();
-                                                            event.stopPropagation();
-                                                        }
-
-                                                        form.classList.add('was-validated');
-                                                    },
-                                                    false,
-                                                );
-                                            });
-                                        })();
-                                    </script>
-                                    <!--end::JavaScript-->
+                        <div class="col-sm-12">
+                            <!--begin::Quick Example-->
+                            <div class="card card-dark card-outline mb-4 col-md-6 col-6">
+                                <!--begin::Header-->
+                                <div class="card-header">
+                                    <div class="card-title">Engenharia de Software 5S</div>
                                 </div>
-                                <!--end::Form Validation-->
+                                <!--end::Header-->
+                                <!--begin::Form-->
+                                <form>
+                                    <!--begin::Body-->
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="exampleInputPassword1"
+                                                class="form-label text-secondary">Programação Web</label>
+                                            <br>
+                                            <i class="nav-icon bi bi-people-fill text-dark"></i>
+                                            <label for="exampleInputPassword1" class="form-label">30 Alunos</label>
+                                        </div>
+                                    </div>
+                                    <!--end::Body-->
+                                    <!--begin::Footer-->
+                                    <div class="card-footer d-flex flex-wrap gap-2">
+                                        <button type="submit" class="btn btn-dark col-6">Ver Alunos</button>
+                                        <div>
+                                            <input class="ps-4" type="file" id="arquivo" hidden>
+                                            <label for="arquivo" class="btn btn-primary ms-3">Adicionar Material</label>
+                                        </div>
+
+
+                                    </div>
+                                    <!--end::Footer-->
+                                </form>
+                                <!--end::Form-->
                             </div>
-                            <!--end::Col-->
                         </div>
-                        <!--end::Row-->
-                    </div>
-                    <!--end::Container-->
-                </div>
-                <!--end::App Content-->
+                        <br>
+                        <!--end::App Content Header-->
+                        <!--begin::App Content-->
+                        <div class="app-content">
+                            <!--begin::Container-->
+                            <div class="container-fluid">
+                                <!--begin::Row-->
+                                <div class="row g-4">
+                                    <!--begin::Col-->
+                                    <div class="app-content">
+                                        <!--begin::Container-->
+                                        <div class="container-fluid">
+                                            <!--begin::Row-->
+                                            <!-- /.card -->
+
+                                            <!--begin::JavaScript-->
+                                            <script>
+                                                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                                                (() => {
+                                                    'use strict';
+
+                                                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                                    const forms = document.querySelectorAll('.needs-validation');
+
+                                                    // Loop over them and prevent submission
+                                                    Array.from(forms).forEach((form) => {
+                                                        form.addEventListener(
+                                                            'submit',
+                                                            (event) => {
+                                                                if (!form.checkValidity()) {
+                                                                    event.preventDefault();
+                                                                    event.stopPropagation();
+                                                                }
+
+                                                                form.classList.add('was-validated');
+                                                            },
+                                                            false,
+                                                        );
+                                                    });
+                                                })();
+                                            </script>
+                                            <!--end::JavaScript-->
+                                        </div>
+                                        <!--end::Form Validation-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Row-->
+                            </div>
+                            <!--end::Container-->
+                        </div>
+                        <!--end::App Content-->
         </main>
         <!--end::App Main-->
         <!--begin::Footer-->

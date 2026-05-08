@@ -85,7 +85,7 @@
                         <li class="nav-item">
                             <a href="../generate/theme.html" class="nav-link">
                                 <i class="nav-icon bi bi-person text-dark"></i>
-                                <p class="text-dark">Aluno</p>
+                                <p class="text-dark">Professor</p>
                             </a>
                         </li>
                         <hr>
@@ -97,20 +97,14 @@
                         </li>
                         <li class="nav-item">
                             <a href="../generate/theme.html" class="nav-link">
-                                <i class="nav-icon bi bi-book text-dark"></i>
-                                <p class="text-dark">Matérias</p>
+                                <i class="nav-icon bi bi-people-fill text-dark"></i>
+                                <p class="text-dark">Turmas</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="../generate/theme.html" class="nav-link">
-                                <i class="nav-icon bi bi-clipboard-check text-dark"></i>
-                                <p class="text-dark">Atividades</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../generate/theme.html" class="nav-link">
-                                <i class="nav-icon bi bi-file-earmark-text text-dark"></i>
-                                <p class="text-dark">Solicitações</p>
+                                <i class="nav-icon bi bi-calendar-check text-dark"></i>
+                                <p class="text-dark">Chamada</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -140,10 +134,10 @@
                         </div>
                         <div class="col-sm-12">
                             <!--begin::Quick Example-->
-                            <div class="card card-primary card-outline mb-4 w-25">
+                            <div class="card card-dark card-outline mb-4 w-25">
                                 <!--begin::Header-->
                                 <div class="card-header">
-                                    <div class="card-title">Engenharia de Software</div>
+                                    <div class="card-title">Engenharia de Software 5S</div>
                                 </div>
                                 <!--end::Header-->
                                 <!--begin::Form-->
@@ -151,18 +145,22 @@
                                     <!--begin::Body-->
                                     <div class="card-body">
                                         <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Engenharia</label>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Programação Web</label>
+                                            <label for="exampleInputPassword1"
+                                                class="form-label text-secondary">Programação Web</label>
                                             <br>
-                                            <label for="exampleInputPassword1" class="form-label">34 alunos</label>
+                                            <i class="nav-icon bi bi-people-fill text-dark"></i>
+                                            <label for="exampleInputPassword1" class="form-label">30 Alunos</label>
                                         </div>
                                     </div>
                                     <!--end::Body-->
                                     <!--begin::Footer-->
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Adicionar notas</button>
+                                    <div class="card-footer d-flex">
+                                        <button type="submit" class="btn btn-dark">Ver Alunos</button>
+                                        <div>
+                                            <input class="ps-4" type="file" id="arquivo" hidden>
+                                            <label for="arquivo" class="btn btn-dark ms-3">Material</label>
+                                        </div>
+
                                     </div>
                                     <!--end::Footer-->
                                 </form>

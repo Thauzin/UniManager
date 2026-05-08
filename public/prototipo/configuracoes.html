@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background: #f4f6fb;
+        display: flex;
+        min-height: 100vh;
+        color: #1a1a2e;
+        font-size: 14px;
+      }
+      aside {
+        width: 210px;
+        min-height: 100vh;
+        background: #fff;
+        border-right: 1px solid #e8eaf0;
+        display: flex;
+        flex-direction: column;
+        padding: 0 0 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        overflow-y: auto;
+      }
+      
+      .logo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 10px;
+        border-bottom: 1px solid #e8eaf0;
+        text-align: center;
+      }
+      
+      .logo img{
+        width: 120px;       
+        height: auto;
+        object-fit: contain;
+        margin-bottom: 8px;
+        border-radius: 30px;
+      }
+     
+      .logo-text strong {
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .logo-text span {
+        font-size: 10px;
+        color: #6b7280;
+      }
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 16px 12px;
+        border-bottom: 1px solid #e8eaf0;
+      }
+      .avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #dbeafe;
+        color: #2563eb;
+        font-weight: 700;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .user-info strong {
+        font-size: 12.5px;
+        display: block;
+      }
+      .user-info span {
+        font-size: 10.5px;
+        color: #6b7280;
+      }
+      nav {
+        flex: 1;
+        padding: 10px 8px;
+      }
+      nav a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 10px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #374151;
+        font-size: 13px;
+        font-weight: 500;
+        transition:
+          background 0.15s,
+          color 0.15s;
+        margin-bottom: 2px;
+        cursor: pointer;
+      }
+      nav a:hover {
+        background: #f0f4ff;
+        color: #2563eb;
+      }
+      nav a.active {
+        background: #eff6ff;
+        color: #2563eb;
+        font-weight: 600;
+      }
+      nav a svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+      .sidebar-footer {
+        padding: 0 8px;
+      }
+      .sidebar-footer a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 10px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #ef4444;
+        font-size: 13px;
+        font-weight: 500;
+        transition: background 0.15s;
+        cursor: pointer;
+      }
+      .sidebar-footer a:hover {
+        background: #fef2f2;
+      }
+      main {
+        margin-left: 210px;
+        flex: 1;
+        padding: 32px 40px;
+        max-width: 800px;
+      }
+      h1 {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+      .subtitle {
+        color: #6b7280;
+        font-size: 13px;
+        margin-bottom: 26px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #e8eaf0;
+        border-radius: 14px;
+        padding: 28px;
+        max-width: 600px;
+      }
+      .card-title {
+        font-size: 15px;
+        font-weight: 700;
+      }
+      .card-desc {
+        font-size: 12.5px;
+        color: #6b7280;
+        margin-top: 2px;
+        margin-bottom: 24px;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .form-group.full {
+        grid-column: 1/-1;
+      }
+      label {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #374151;
+      }
+      input {
+        padding: 9px 13px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 13.5px;
+        color: #1a1a2e;
+        background: #f8fafc;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        outline: none;
+        font-family: inherit;
+      }
+      input:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        background: #fff;
+      }
+      input.error {
+        border-color: #ef4444;
+      }
+      input.error:focus {
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+      }
+      .field-error {
+        font-size: 11px;
+        color: #ef4444;
+        display: none;
+        align-items: center;
+        gap: 4px;
+        margin-top: 1px;
+      }
+      .field-error.visible {
+        display: flex;
+      }
+      .actions {
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .btn-save {
+        padding: 10px 22px;
+        background: #2563eb;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.1s;
+        font-family: inherit;
+      }
+      .btn-save:hover {
+        background: #1d4ed8;
+      }
+      .btn-save:active {
+        transform: scale(0.98);
+      }
+      .btn-cancel {
+        padding: 10px 18px;
+        background: transparent;
+        color: #6b7280;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 13.5px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-family: inherit;
+      }
+      .btn-cancel:hover {
+        background: #f4f6fb;
+      }
+      #toast {
+        position: fixed;
+        bottom: 22px;
+        right: 22px;
+        min-width: 260px;
+        padding: 13px 16px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13);
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+        pointer-events: none;
+        z-index: 999;
+      }
+      #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      #toast.success {
+        background: #ecfdf5;
+        color: #065f46;
+        border: 1px solid #6ee7b7;
+      }
+      #toast.err {
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fca5a5;
+      }
+    </style>
+  </head>
+  <body>
+    <aside>
+      <div class="logo"> 
+        <img src="/UniManager/public/template/src/assets/img/logo.jpeg" alt="logo">
+          <strong></strong><span>UniManager</span>
+        </div>
+      </div>
+      <div class="user-info">
+        <div class="avatar">J</div>
+        <div>
+          <strong id="sidebar-name">João Silva</strong><span>Aluno</span>
+        </div>
+      </div>
+      <nav>
+        <a href="#">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" /></svg
+          >Dashboard
+        </a>
+        <a href="#">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+            <path
+              d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+            /></svg
+          >Matérias
+        </a>
+        <a href="#">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M9 11l3 3L22 4" />
+            <path
+              d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+            /></svg
+          >Atividades
+        </a>
+        <a href="solicitacao.html"> 
+          <svg 
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+            />
+            <polyline points="14 2 14 8 20 8" /></svg
+          >Solicitações
+        </a>
+        <a href="#" class="active">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+            /></svg
+          >Configurações
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            width="16"
+            height="16"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" /></svg
+          >Sair
+        </a>
+      </div>
+    </aside>
+
+    <main>
+      <h1>Configurações</h1>
+      <p class="subtitle">Edite suas informações pessoais</p>
+
+      <div class="card">
+        <div class="card-title">Informações Pessoais</div>
+        <div class="card-desc">Mantenha seus dados sempre atualizados</div>
+
+        <form id="form" novalidate>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label for="nome">Nome Completo</label>
+              <input
+                type="text"
+                id="nome"
+                value="João Silva"
+                placeholder="Seu nome completo"
+              />
+              <span class="field-error" id="nome-err">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <span id="nome-msg"></span>
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input
+                type="email"
+                id="email"
+                value="aluno@escola.com"
+                placeholder="seu@email.com"
+              />
+              <span class="field-error" id="email-err">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <span id="email-msg"></span>
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <input
+                type="tel"
+                id="telefone"
+                value="(11) 98765-4321"
+                placeholder="(00) 00000-0000"
+                maxlength="15"
+              />
+              <span class="field-error" id="telefone-err">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <span id="telefone-msg"></span>
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="curso">Curso</label>
+              <input
+                type="text"
+                id="curso"
+                value="Engenharia de Software"
+                placeholder="Nome do curso"
+              />
+              <span class="field-error" id="curso-err">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <span id="curso-msg"></span>
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="periodo">Período</label>
+              <input
+                type="text"
+                id="periodo"
+                value="5º Período"
+                placeholder="Ex: 5º Período"
+              />
+              <span class="field-error" id="periodo-err">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <span id="periodo-msg"></span>
+              </span>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="btn-save">Salvar Alterações</button>
+            <button type="button" class="btn-cancel" id="btn-cancel">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <div id="toast"></div>
+
+    <script>
+      const fields = ["nome", "email", "telefone", "curso", "periodo"];
+      const saved = {};
+      fields.forEach((id) => (saved[id] = document.getElementById(id).value));
+
+      // Máscara telefone
+      document
+        .getElementById("telefone")
+        .addEventListener("input", function () {
+          let v = this.value.replace(/\D/g, "").slice(0, 11);
+          if (v.length <= 2) v = v.replace(/^(\d{0,2})/, "($1");
+          else if (v.length <= 7) v = v.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
+          else v = v.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
+          this.value = v;
+        });
+
+      function showErr(id, msg) {
+        document.getElementById(id + "-err").classList.add("visible");
+        document.getElementById(id + "-msg").textContent = msg;
+        document.getElementById(id).classList.add("error");
+      }
+      function clearErr(id) {
+        document.getElementById(id + "-err").classList.remove("visible");
+        document.getElementById(id).classList.remove("error");
+      }
+
+      function validate(id) {
+        const v = document.getElementById(id).value.trim();
+        if (!v) {
+          showErr(id, "Este campo é obrigatório.");
+          return false;
+        }
+        if (id === "nome" && v.split(" ").filter(Boolean).length < 2) {
+          showErr(id, "Informe nome e sobrenome.");
+          return false;
+        }
+        if (id === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
+          showErr(id, "E-mail inválido.");
+          return false;
+        }
+        if (id === "telefone" && v.replace(/\D/g, "").length < 10) {
+          showErr(id, "Telefone incompleto. Ex: (11) 98765-4321");
+          return false;
+        }
+        clearErr(id);
+        return true;
+      }
+
+      fields.forEach((id) => {
+        document
+          .getElementById(id)
+          .addEventListener("blur", () => validate(id));
+        document
+          .getElementById(id)
+          .addEventListener("input", () => clearErr(id));
+      });
+
+      let toastTimer;
+      function toast(msg, type = "success") {
+        clearTimeout(toastTimer);
+        const t = document.getElementById("toast");
+        const icon =
+          type === "success"
+            ? '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'
+            : '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+        t.innerHTML = icon + msg;
+        t.className = "show " + (type === "success" ? "success" : "err");
+        toastTimer = setTimeout(() => t.classList.remove("show"), 3500);
+      }
+
+      document.getElementById("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const ok = fields.every((id) => validate(id));
+        if (!ok) {
+          toast("Corrija os erros antes de salvar.", "error");
+          return;
+        }
+        const changed = fields.some(
+          (id) => document.getElementById(id).value.trim() !== saved[id].trim(),
+        );
+        if (!changed) {
+          toast("Nenhuma alteração detectada.", "error");
+          return;
+        }
+        fields.forEach(
+          (id) => (saved[id] = document.getElementById(id).value.trim()),
+        );
+        document.getElementById("sidebar-name").textContent = document
+          .getElementById("nome")
+          .value.trim();
+        toast("Alterações salvas com sucesso! ✓");
+      });
+
+      document.getElementById("btn-cancel").addEventListener("click", () => {
+        fields.forEach((id) => {
+          document.getElementById(id).value = saved[id];
+          clearErr(id);
+        });
+        toast("Alterações descartadas.", "error");
+      });
+    </script>
+  </body>
+</html>

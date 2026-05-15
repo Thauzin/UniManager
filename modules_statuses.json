@@ -1,0 +1,7 @@
+{
+    "Users": true,
+    "AccessLevels": true,
+    "Centers": true,
+    "ProductProviders": true,
+    "ProductCategories": true
+}

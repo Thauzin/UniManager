@@ -1,622 +1,497 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SGA – Minhas Matérias</title>
-<style>
-  /* ===== RESET & BASE ===== */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; overflow: hidden; }
-  body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background: #f4f6fb;
-    display: flex;
-    color: #1a1a2e;
-    font-size: 14px;
-  }
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>UniManager | Minhas Matérias</title>
 
-  /* ===== SIDEBAR ===== */
-  aside {
-    width: 230px;
-    min-height: 100vh;
-    background: #fff;
-    border-right: 1px solid #e8eaf0;
-    display: flex;
-    flex-direction: column;
-    padding: 0 0 24px;
-    position: fixed;
-    top: 0; left: 0; bottom: 0;
-    z-index: 10;
-  }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1a1a1a"  media="(prefers-color-scheme: dark)" />
 
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 22px 20px 18px;
-    border-bottom: 1px solid #e8eaf0;
-  }
-  .logo-icon {
-    width: 40px; height: 40px;
-    background: #2563eb;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 18px; flex-shrink: 0;
-  }
-  .logo-text strong { display: block; font-size: 15px; font-weight: 700; }
-  .logo-text span   { font-size: 11px; color: #6b7280; }
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
+    integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q="
+    crossorigin="anonymous" media="print" onload="this.media='all'" />
 
-  .user-info {
-    display: flex; align-items: center; gap: 12px;
-    padding: 18px 20px 14px;
-    border-bottom: 1px solid #e8eaf0;
-  }
-  .avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: #dbeafe; color: #2563eb;
-    font-weight: 700; font-size: 14px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .user-info strong { font-size: 13px; display: block; }
-  .user-info span   { font-size: 11px; color: #6b7280; }
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
+    crossorigin="anonymous" />
 
-  nav { flex: 1; padding: 12px 10px; }
-  nav a {
-    display: flex; align-items: center; gap: 12px;
-    padding: 10px 12px; border-radius: 8px;
-    text-decoration: none; color: #374151;
-    font-size: 13.5px; font-weight: 500;
-    transition: background .15s, color .15s;
-    margin-bottom: 2px; cursor: pointer;
-  }
-  nav a:hover  { background: #f0f4ff; color: #2563eb; }
-  nav a.active { background: #eff6ff; color: #2563eb; font-weight: 600; }
-  nav a svg { width: 18px; height: 18px; flex-shrink: 0; }
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    crossorigin="anonymous" />
 
-  .sidebar-footer { padding: 0 10px; }
-  .sidebar-footer a {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 12px; border-radius: 8px;
-    text-decoration: none; color: #ef4444;
-    font-size: 13.5px; font-weight: 500;
-    transition: background .15s; cursor: pointer;
-  }
-  .sidebar-footer a:hover { background: #fef2f2; }
+  <link rel="stylesheet" href="../template/dist/css/adminlte.css" />
 
-  /* ===== MAIN ===== */
-  main {
-    margin-left: 230px;
-    flex: 1;
-    padding: 40px 48px 56px;
-    overflow-y: auto;
-    height: 100vh;
-  }
+  <style>
+    .presence-good { color: #16a34a; font-weight: 600; font-size: .8rem; }
+    .presence-ok   { color: #d97706; font-weight: 600; font-size: .8rem; }
+    .presence-bad  { color: #dc2626; font-weight: 600; font-size: .8rem; }
 
-  h1       { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
-  .subtitle { color: #6b7280; font-size: 13.5px; margin-bottom: 28px; }
+    .avg-good { color: #16a34a; font-weight: 700; }
+    .avg-ok   { color: #d97706; font-weight: 700; }
+    .avg-bad  { color: #dc2626; font-weight: 700; }
 
-  /* ===== SUMMARY CARDS ===== */
-  .summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 28px;
-  }
-  .sum-card {
-    background: #fff;
-    border: 1px solid #e8eaf0;
-    border-radius: 14px;
-    padding: 20px 22px;
-    display: flex; align-items: center; gap: 18px;
-  }
-  .sum-icon {
-    width: 44px; height: 44px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-  }
-  .sum-icon.blue   { background: #eff6ff; }
-  .sum-icon.green  { background: #f0fdf4; }
-  .sum-icon.purple { background: #faf5ff; }
-  .sum-label { font-size: 12px; color: #6b7280; margin-bottom: 4px; }
-  .sum-val   { font-size: 24px; font-weight: 700; }
+    .subject-card { transition: box-shadow .2s; }
+    .subject-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.09) !important; }
 
-  /* ===== SUBJECT CARDS ===== */
-  .subject-card {
-    background: #fff;
-    border: 1px solid #e8eaf0;
-    border-radius: 14px;
-    padding: 24px 28px;
-    margin-bottom: 16px;
-    transition: box-shadow .2s;
-  }
-  .subject-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.07); }
+    .badge-done    { background: #dcfce7; color: #166534; }
+    .badge-pending { background: #fef9c3; color: #854d0e; }
+    .badge-late    { background: #fee2e2; color: #991b1b; }
 
-  .subject-header {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    margin-bottom: 6px;
-  }
-  .subject-name { font-size: 16px; font-weight: 700; }
-
-  .presence          { font-size: 12.5px; font-weight: 600; }
-  .presence.good     { color: #16a34a; }
-  .presence.ok       { color: #d97706; }
-  .presence.bad      { color: #dc2626; }
-
-  .subject-prof {
-    font-size: 12.5px; color: #6b7280;
-    display: flex; align-items: center; gap: 5px;
-    margin-bottom: 20px;
-  }
-  .subject-prof svg { width: 13px; height: 13px; }
-
-  .grades {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 18px;
-  }
-  .grade-block label {
-    font-size: 12px; color: #6b7280;
-    margin-bottom: 5px; display: block;
-  }
-  .grade-val      { font-size: 20px; font-weight: 700; }
-  .grade-val.good { color: #16a34a; }
-  .grade-val.ok   { color: #d97706; }
-  .grade-val.bad  { color: #dc2626; }
-
-  .btn-details {
-    padding: 8px 18px;
-    background: #fff;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 13px; font-weight: 600;
-    color: #374151; cursor: pointer;
-    transition: background .2s, border-color .2s, color .2s;
-    font-family: inherit;
-  }
-  .btn-details:hover {
-    background: #f0f4ff;
-    border-color: #2563eb;
-    color: #2563eb;
-  }
-
-  /* ===== MODAL ===== */
-  .modal-bg {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,.35);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 100;
-    opacity: 0; pointer-events: none;
-    transition: opacity .25s;
-  }
-  .modal-bg.open { opacity: 1; pointer-events: all; }
-
-  .modal {
-    background: #fff;
-    border-radius: 16px;
-    padding: 30px;
-    width: 500px;
-    max-width: 95vw;
-    max-height: 85vh;
-    overflow-y: auto;
-    transform: translateY(16px);
-    transition: transform .25s;
-    box-shadow: 0 20px 60px rgba(0,0,0,.18);
-  }
-  .modal-bg.open .modal { transform: translateY(0); }
-
-  .modal-header {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    margin-bottom: 22px;
-  }
-  .modal-title { font-size: 17px; font-weight: 700; }
-  .modal-sub   { font-size: 12.5px; color: #6b7280; margin-top: 3px; }
-
-  .close-btn {
-    background: none; border: none; cursor: pointer;
-    color: #6b7280; font-size: 20px; line-height: 1;
-    padding: 2px 7px; border-radius: 6px;
-    transition: background .15s;
-  }
-  .close-btn:hover { background: #f4f6fb; }
-
-  .detail-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 14px; margin-bottom: 22px;
-  }
-  .detail-box { background: #f8fafc; border-radius: 10px; padding: 16px; }
-  .detail-box label {
-    font-size: 11px; color: #6b7280; font-weight: 600;
-    text-transform: uppercase; letter-spacing: .4px;
-    display: block; margin-bottom: 8px;
-  }
-  .detail-box .dval { font-size: 22px; font-weight: 700; }
-
-  .progress-wrap { margin-bottom: 20px; }
-  .progress-wrap .prog-label {
-    font-size: 12.5px; font-weight: 600; color: #374151;
-    margin-bottom: 8px;
-    display: flex; justify-content: space-between;
-  }
-  .bar-track { background: #f0f0f0; border-radius: 99px; height: 8px; }
-  .bar-fill  { height: 8px; border-radius: 99px; transition: width .6s; }
-
-  .act-section-title {
-    font-size: 13px; font-weight: 600; color: #374151;
-    margin-bottom: 10px;
-  }
-  .act-list { display: flex; flex-direction: column; gap: 8px; }
-  .act-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 14px;
-    background: #f8fafc; border-radius: 9px; font-size: 13px;
-  }
-  .act-status {
-    font-size: 11.5px; font-weight: 600;
-    padding: 3px 10px; border-radius: 99px;
-  }
-  .act-status.done    { background: #dcfce7; color: #166534; }
-  .act-status.pending { background: #fef9c3; color: #854d0e; }
-  .act-status.late    { background: #fee2e2; color: #991b1b; }
-
-  /* ===== SCROLLBAR CUSTOMIZATION ===== */
-  main::-webkit-scrollbar         { width: 6px; }
-  main::-webkit-scrollbar-track   { background: transparent; }
-  main::-webkit-scrollbar-thumb   { background: #d1d5db; border-radius: 99px; }
-  main::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
-
-  .modal::-webkit-scrollbar         { width: 5px; }
-  .modal::-webkit-scrollbar-thumb   { background: #d1d5db; border-radius: 99px; }
-</style>
+    .prog-bar-wrap { background: #f0f0f0; border-radius: 99px; height: 8px; overflow: hidden; }
+    .prog-bar-fill { height: 8px; border-radius: 99px; transition: width .5s; }
+  </style>
 </head>
-<body>
 
-<!-- ===================== SIDEBAR ===================== -->
-<aside>
-  <div class="logo">
-    <div class="logo-icon">🎓</div>
-    <div class="logo-text">
-      <strong>SGA</strong>
-      <span>Sistema Acadêmico</span>
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+<div class="app-wrapper">
+
+  <!--begin::Header-->
+  <nav class="app-header navbar navbar-expand bg-body"></nav>
+  <!--end::Header-->
+
+  <!--begin::Sidebar-->
+  <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+    <div class="sidebar-brand">
+      <a href="#" class="brand-link">
+        <img src="../assets/img/AdminLTELogo.png" alt="UniManager"
+             class="brand-image opacity-75 shadow" />
+        <span class="brand-text fw-light"></span>
+      </a>
     </div>
-  </div>
-
-  <div class="user-info">
-    <div class="avatar">J</div>
-    <div>
-      <strong>João Silva</strong>
-      <span>Aluno</span>
+    <div class="sidebar-wrapper bg-light">
+      <nav class="mt-2">
+        <ul class="nav sidebar-menu flex-column"
+            data-lte-toggle="treeview" role="navigation"
+            aria-label="Main navigation" data-accordion="false">
+          <hr>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon bi bi-person text-dark"></i>
+              <p class="text-dark">Aluno</p>
+            </a>
+          </li>
+          <hr>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon bi bi-bar-chart text-dark"></i>
+              <p class="text-dark">Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="verDetalhesMaterias.html" class="nav-link active">
+              <i class="nav-icon bi bi-book text-dark"></i>
+              <p class="text-dark">Matérias</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon bi bi-clipboard-check text-dark"></i>
+              <p class="text-dark">Atividades</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="solicitacao.html" class="nav-link">
+              <i class="nav-icon bi bi-file-earmark-text text-dark"></i>
+              <p class="text-dark">Solicitações</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="configuracoes.html" class="nav-link">
+              <i class="nav-icon bi bi-gear text-dark"></i>
+              <p class="text-dark">Configurações</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
-  </div>
+  </aside>
+  <!--end::Sidebar-->
 
-  <nav>
-    <a href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="7" height="7" rx="1"/>
-        <rect x="14" y="3" width="7" height="7" rx="1"/>
-        <rect x="3" y="14" width="7" height="7" rx="1"/>
-        <rect x="14" y="14" width="7" height="7" rx="1"/>
-      </svg>
-      Dashboard
-    </a>
-    <a href="#" class="active">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-      </svg>
-      Matérias
-    </a>
-    <a href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M9 11l3 3L22 4"/>
-        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-      </svg>
-      Atividades
-    </a>
-    <a href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <polyline points="14 2 14 8 20 8"/>
-      </svg>
-      Solicitações
-    </a>
-    <a href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06
-          a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09
-          A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83
-          l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09
-          A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83
-          l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09
-          a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83
-          l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09
-          a1.65 1.65 0 0 0-1.51 1z"/>
-      </svg>
-      Configurações
-    </a>
-  </nav>
+  <!--begin::App Main-->
+  <main class="app-main">
 
-  <div class="sidebar-footer">
-    <a href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-        <polyline points="16 17 21 12 16 7"/>
-        <line x1="21" y1="12" x2="9" y2="12"/>
-      </svg>
-      Sair
-    </a>
-  </div>
-</aside>
-
-<!-- ===================== MAIN ===================== -->
-<main>
-  <h1>Minhas Matérias</h1>
-  <p class="subtitle">Acompanhe seu desempenho em cada disciplina</p>
-
-  <!-- Summary -->
-  <div class="summary">
-    <div class="sum-card">
-      <div class="sum-icon blue">📚</div>
-      <div>
-        <div class="sum-label">Total de Disciplinas</div>
-        <div class="sum-val">6</div>
+    <!--begin::App Content Header-->
+    <div class="app-content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">
+            <h3 class="mb-0">Minhas Matérias</h3>
+            <p>Acompanhe seu desempenho em cada disciplina</p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="sum-card">
-      <div class="sum-icon green">📈</div>
-      <div>
-        <div class="sum-label">Média Geral</div>
-        <div class="sum-val" id="media-geral">–</div>
-      </div>
-    </div>
-    <div class="sum-card">
-      <div class="sum-icon purple">🗓️</div>
-      <div>
-        <div class="sum-label">Frequência Média</div>
-        <div class="sum-val" id="freq-media">–</div>
-      </div>
-    </div>
-  </div>
+    <!--end::App Content Header-->
 
-  <!-- Subject cards injected by JS -->
-  <div id="cards-container"></div>
-</main>
+    <!--begin::App Content-->
+    <div class="app-content">
+      <div class="container-fluid">
 
-<!-- ===================== MODAL ===================== -->
-<div class="modal-bg" id="modal-bg">
-  <div class="modal" id="modal">
-    <div class="modal-header">
-      <div>
-        <div class="modal-title" id="modal-title"></div>
-        <div class="modal-sub"   id="modal-sub"></div>
+        <!-- Cards de resumo -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-4">
+            <div class="card card-outline card-primary h-100 mb-0">
+              <div class="card-body d-flex align-items-center gap-3">
+                <div class="rounded-3 p-2 bg-primary bg-opacity-10 fs-4">📚</div>
+                <div>
+                  <div class="text-muted" style="font-size:.75rem">Total de Disciplinas</div>
+                  <div class="fw-bold fs-4">6</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card card-outline card-success h-100 mb-0">
+              <div class="card-body d-flex align-items-center gap-3">
+                <div class="rounded-3 p-2 bg-success bg-opacity-10 fs-4">📈</div>
+                <div>
+                  <div class="text-muted" style="font-size:.75rem">Média Geral</div>
+                  <div class="fw-bold fs-4" id="media-geral">–</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card card-outline card-warning h-100 mb-0">
+              <div class="card-body d-flex align-items-center gap-3">
+                <div class="rounded-3 p-2 bg-warning bg-opacity-10 fs-4">🗓️</div>
+                <div>
+                  <div class="text-muted" style="font-size:.75rem">Frequência Média</div>
+                  <div class="fw-bold fs-4" id="freq-media">–</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards de matérias -->
+        <div id="cards-container"></div>
+
       </div>
-      <button class="close-btn" id="close-modal">✕</button>
     </div>
-    <div id="modal-body"></div>
+    <!--end::App Content-->
+
+  </main>
+  <!--end::App Main-->
+
+  <!--begin::Footer-->
+  <footer class="app-footer">
+    <div class="float-end d-none d-sm-inline"></div>
+    <strong>
+      Copyright &copy; 2014-2026&nbsp;
+      <a href="https://adminlte.io" class="text-decoration-none">UniManager</a>.
+    </strong>
+    All rights reserved.
+  </footer>
+  <!--end::Footer-->
+
+</div>
+<!--end::App Wrapper-->
+
+<!-- Modal -->
+<div class="modal fade" id="modalDetalhes" tabindex="-1"
+     aria-labelledby="modalDetalhesLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold" id="modalDetalhesLabel">–</h5>
+          <small class="text-muted" id="modal-prof">–</small>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary"
+                data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ===================== JAVASCRIPT ===================== -->
+<!--begin::Script-->
+<!--begin::Third Party Plugin(OverlayScrollbars)-->
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
+    crossorigin="anonymous"></script>
+<!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    crossorigin="anonymous"></script>
+<!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+    crossorigin="anonymous"></script>
+<!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+<script src="../js/adminlte.js"></script>
+<!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
 <script>
-  /* -------- DATA -------- */
-  const materias = [
-    {
-      nome: 'Programação Web',
-      prof: 'Prof. Maria Santos',
-      b1: 9.0, b2: 8.5, presenca: 95,
-      atividades: [
-        { nome: 'Trabalho HTML/CSS',  status: 'done' },
-        { nome: 'Projeto JavaScript', status: 'done' },
-        { nome: 'API REST',           status: 'done' },
-        { nome: 'Framework React',    status: 'pending' },
-        { nome: 'Projeto Final',      status: 'pending' },
-        { nome: 'Trabalho Extra',     status: 'pending' },
-        { nome: 'Seminário',          status: 'done' },
-        { nome: 'Quiz Online',        status: 'done' },
-        { nome: 'Exercício 9',        status: 'done' },
-        { nome: 'Exercício 10',       status: 'done' },
-      ]
-    },
-    {
-      nome: 'Banco de Dados',
-      prof: 'Prof. João Oliveira',
-      b1: 8.0, b2: 7.5, presenca: 88,
-      atividades: [
-        { nome: 'Modelagem ER',       status: 'done' },
-        { nome: 'SQL Básico',         status: 'done' },
-        { nome: 'Normalização',       status: 'done' },
-        { nome: 'Stored Procedures',  status: 'late' },
-        { nome: 'Projeto BD',         status: 'pending' },
-      ]
-    },
-    {
-      nome: 'Estrutura de Dados',
-      prof: 'Profa. Ana Lima',
-      b1: 7.5, b2: 8.0, presenca: 92,
-      atividades: [
-        { nome: 'Listas Encadeadas',  status: 'done' },
-        { nome: 'Árvores Binárias',   status: 'done' },
-        { nome: 'Grafos',             status: 'pending' },
-        { nome: 'Ordenação',          status: 'done' },
-        { nome: 'Hash Tables',        status: 'late' },
-      ]
-    },
-    {
-      nome: 'Engenharia de Software',
-      prof: 'Prof. Carlos Mendes',
-      b1: 9.5, b2: 9.0, presenca: 97,
-      atividades: [
-        { nome: 'Diagrama UML',       status: 'done' },
-        { nome: 'Caso de Uso',        status: 'done' },
-        { nome: 'Plano de Teste',     status: 'done' },
-        { nome: 'Documentação',       status: 'done' },
-        { nome: 'Projeto Final',      status: 'pending' },
-      ]
-    },
-    {
-      nome: 'Redes de Computadores',
-      prof: 'Prof. Roberto Faria',
-      b1: 7.0, b2: 7.5, presenca: 80,
-      atividades: [
-        { nome: 'Modelo OSI',         status: 'done' },
-        { nome: 'TCP/IP',             status: 'done' },
-        { nome: 'Roteamento',         status: 'late' },
-        { nome: 'Firewall',           status: 'pending' },
-        { nome: 'Projeto Redes',      status: 'pending' },
-      ]
-    },
-    {
-      nome: 'Inteligência Artificial',
-      prof: 'Profa. Fernanda Costa',
-      b1: 8.5, b2: 9.0, presenca: 94,
-      atividades: [
-        { nome: 'Busca Heurística',   status: 'done' },
-        { nome: 'Redes Neurais',      status: 'done' },
-        { nome: 'Machine Learning',   status: 'done' },
-        { nome: 'NLP Básico',         status: 'pending' },
-        { nome: 'Projeto IA',         status: 'pending' },
-      ]
-    },
-  ];
+    const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+    const Default = {
+        scrollbarTheme: 'os-theme-light',
+        scrollbarAutoHide: 'leave',
+        scrollbarClickScroll: true,
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
 
-  /* -------- HELPERS -------- */
-  function avg(m)         { return ((m.b1 + m.b2) / 2); }
-  function avgClass(a)    { return a >= 7 ? 'good' : a >= 5 ? 'ok' : 'bad'; }
-  function presClass(p)   { return p >= 90 ? 'good' : p >= 75 ? 'ok' : 'bad'; }
-  function presColor(p)   { return p >= 90 ? '#16a34a' : p >= 75 ? '#d97706' : '#dc2626'; }
-  function avgColor(a)    { return a >= 7  ? '#16a34a' : a >= 5  ? '#d97706' : '#dc2626'; }
-  function statusLabel(s) { return s === 'done' ? 'Entregue' : s === 'pending' ? 'Pendente' : 'Atrasado'; }
+        // Disable OverlayScrollbars on mobile devices to prevent touch interference
+        const isMobile = window.innerWidth <= 992;
 
-  /* -------- SUMMARY -------- */
-  const totalAvg  = (materias.reduce((s, m) => s + avg(m), 0) / materias.length).toFixed(2);
-  const totalFreq = Math.round(materias.reduce((s, m) => s + m.presenca, 0) / materias.length);
-  document.getElementById('media-geral').textContent = totalAvg;
-  document.getElementById('freq-media').textContent  = totalFreq + '%';
-
-  /* -------- RENDER CARDS -------- */
-  const container = document.getElementById('cards-container');
-
-  materias.forEach((m, i) => {
-    const a    = avg(m);
-    const done  = m.atividades.filter(x => x.status === 'done').length;
-    const total = m.atividades.length;
-
-    const card = document.createElement('div');
-    card.className = 'subject-card';
-    card.innerHTML = `
-      <div class="subject-header">
-        <div class="subject-name">${m.nome}</div>
-        <div class="presence ${presClass(m.presenca)}">${m.presenca}% de presença</div>
-      </div>
-      <div class="subject-prof">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
-        ${m.prof}
-      </div>
-      <div class="grades">
-        <div class="grade-block">
-          <label>1º Bimestre</label>
-          <div class="grade-val">${m.b1.toFixed(1)}</div>
-        </div>
-        <div class="grade-block">
-          <label>2º Bimestre</label>
-          <div class="grade-val">${m.b2.toFixed(1)}</div>
-        </div>
-        <div class="grade-block">
-          <label>Média</label>
-          <div class="grade-val ${avgClass(a)}">${a.toFixed(2)}</div>
-        </div>
-        <div class="grade-block">
-          <label>Atividades</label>
-          <div class="grade-val">${done}/${total}</div>
-        </div>
-      </div>
-      <button class="btn-details" data-idx="${i}">Ver Detalhes</button>
-    `;
-    container.appendChild(card);
-  });
-
-  /* -------- MODAL -------- */
-  const modalBg = document.getElementById('modal-bg');
-
-  document.getElementById('close-modal').addEventListener('click', () => {
-    modalBg.classList.remove('open');
-  });
-  modalBg.addEventListener('click', e => {
-    if (e.target === modalBg) modalBg.classList.remove('open');
-  });
-
-  container.addEventListener('click', e => {
-    const btn = e.target.closest('.btn-details');
-    if (!btn) return;
-
-    const m     = materias[+btn.dataset.idx];
-    const a     = avg(m);
-    const done  = m.atividades.filter(x => x.status === 'done').length;
-    const total = m.atividades.length;
-    const pct   = Math.round((done / total) * 100);
-
-    document.getElementById('modal-title').textContent = m.nome;
-    document.getElementById('modal-sub').textContent   = m.prof;
-
-    const actItems = m.atividades.map(at => `
-      <div class="act-item">
-        <span>${at.nome}</span>
-        <span class="act-status ${at.status}">${statusLabel(at.status)}</span>
-      </div>
-    `).join('');
-
-    document.getElementById('modal-body').innerHTML = `
-      <div class="detail-grid">
-        <div class="detail-box">
-          <label>1º Bimestre</label>
-          <div class="dval">${m.b1.toFixed(1)}</div>
-        </div>
-        <div class="detail-box">
-          <label>2º Bimestre</label>
-          <div class="dval">${m.b2.toFixed(1)}</div>
-        </div>
-        <div class="detail-box">
-          <label>Média Final</label>
-          <div class="dval" style="color:${avgColor(a)}">${a.toFixed(2)}</div>
-        </div>
-        <div class="detail-box">
-          <label>Atividades</label>
-          <div class="dval">${done}/${total}</div>
-        </div>
-      </div>
-
-      <div class="progress-wrap">
-        <div class="prog-label">
-          <span>Frequência</span>
-          <span style="color:${presColor(m.presenca)}">${m.presenca}%</span>
-        </div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:${m.presenca}%; background:${presColor(m.presenca)}"></div>
-        </div>
-      </div>
-
-      <div class="progress-wrap">
-        <div class="prog-label">
-          <span>Atividades concluídas</span>
-          <span>${done}/${total} (${pct}%)</span>
-        </div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:${pct}%; background:#2563eb"></div>
-        </div>
-      </div>
-
-      <div class="act-section-title">Lista de Atividades</div>
-      <div class="act-list">${actItems}</div>
-    `;
-
-    modalBg.classList.add('open');
-  });
+        if (
+            sidebarWrapper &&
+            OverlayScrollbarsGlobal?.OverlayScrollbars !== undefined &&
+            !isMobile
+        ) {
+            OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                scrollbars: {
+                    theme: Default.scrollbarTheme,
+                    autoHide: Default.scrollbarAutoHide,
+                    clickScroll: Default.scrollbarClickScroll,
+                },
+            });
+        }
+    });
 </script>
+<!--end::OverlayScrollbars Configure-->
+
+<!--begin::Page Logic-->
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach((form) => {
+            form.addEventListener('submit', (event) => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+
+    /* ── DATA ── */
+    const materias = [
+        {
+            nome: 'Programação Web', prof: 'Prof. Maria Santos',
+            b1: 9.0, b2: 8.5, presenca: 95,
+            atividades: [
+                { nome: 'Trabalho HTML/CSS',  status: 'done'    },
+                { nome: 'Projeto JavaScript', status: 'done'    },
+                { nome: 'API REST',           status: 'done'    },
+                { nome: 'Framework React',    status: 'pending' },
+                { nome: 'Projeto Final',      status: 'pending' },
+                { nome: 'Trabalho Extra',     status: 'pending' },
+                { nome: 'Seminário',          status: 'done'    },
+                { nome: 'Quiz Online',        status: 'done'    },
+                { nome: 'Exercício 9',        status: 'done'    },
+                { nome: 'Exercício 10',       status: 'done'    },
+            ]
+        },
+        {
+            nome: 'Banco de Dados', prof: 'Prof. João Oliveira',
+            b1: 8.0, b2: 7.5, presenca: 88,
+            atividades: [
+                { nome: 'Modelagem ER',      status: 'done'    },
+                { nome: 'SQL Básico',        status: 'done'    },
+                { nome: 'Normalização',      status: 'done'    },
+                { nome: 'Stored Procedures', status: 'late'    },
+                { nome: 'Projeto BD',        status: 'pending' },
+            ]
+        },
+        {
+            nome: 'Estrutura de Dados', prof: 'Profa. Ana Lima',
+            b1: 7.5, b2: 8.0, presenca: 92,
+            atividades: [
+                { nome: 'Listas Encadeadas', status: 'done'    },
+                { nome: 'Árvores Binárias',  status: 'done'    },
+                { nome: 'Grafos',            status: 'pending' },
+                { nome: 'Ordenação',         status: 'done'    },
+                { nome: 'Hash Tables',       status: 'late'    },
+            ]
+        },
+        {
+            nome: 'Engenharia de Software', prof: 'Prof. Carlos Mendes',
+            b1: 9.5, b2: 9.0, presenca: 97,
+            atividades: [
+                { nome: 'Diagrama UML',   status: 'done'    },
+                { nome: 'Caso de Uso',    status: 'done'    },
+                { nome: 'Plano de Teste', status: 'done'    },
+                { nome: 'Documentação',   status: 'done'    },
+                { nome: 'Projeto Final',  status: 'pending' },
+            ]
+        },
+        {
+            nome: 'Redes de Computadores', prof: 'Prof. Roberto Faria',
+            b1: 7.0, b2: 7.5, presenca: 80,
+            atividades: [
+                { nome: 'Modelo OSI',    status: 'done'    },
+                { nome: 'TCP/IP',        status: 'done'    },
+                { nome: 'Roteamento',    status: 'late'    },
+                { nome: 'Firewall',      status: 'pending' },
+                { nome: 'Projeto Redes', status: 'pending' },
+            ]
+        },
+        {
+            nome: 'Inteligência Artificial', prof: 'Profa. Fernanda Costa',
+            b1: 8.5, b2: 9.0, presenca: 94,
+            atividades: [
+                { nome: 'Busca Heurística', status: 'done'    },
+                { nome: 'Redes Neurais',    status: 'done'    },
+                { nome: 'Machine Learning', status: 'done'    },
+                { nome: 'NLP Básico',       status: 'pending' },
+                { nome: 'Projeto IA',       status: 'pending' },
+            ]
+        },
+    ];
+
+    /* ── HELPERS ── */
+    const avg         = m => (m.b1 + m.b2) / 2;
+    const avgClass    = a => a >= 7 ? 'avg-good' : a >= 5 ? 'avg-ok' : 'avg-bad';
+    const presClass   = p => p >= 90 ? 'presence-good' : p >= 75 ? 'presence-ok' : 'presence-bad';
+    const presColor   = p => p >= 90 ? '#16a34a' : p >= 75 ? '#d97706' : '#dc2626';
+    const avgColor    = a => a >= 7  ? '#16a34a' : a >= 5  ? '#d97706' : '#dc2626';
+    const statusLabel = s => s === 'done' ? 'Entregue' : s === 'pending' ? 'Pendente' : 'Atrasado';
+    const statusBadge = s => s === 'done' ? 'badge-done' : s === 'pending' ? 'badge-pending' : 'badge-late';
+
+    /* ── SUMMARY ── */
+    document.getElementById('media-geral').textContent =
+        (materias.reduce((s, m) => s + avg(m), 0) / materias.length).toFixed(2);
+    document.getElementById('freq-media').textContent =
+        Math.round(materias.reduce((s, m) => s + m.presenca, 0) / materias.length) + '%';
+
+    /* ── RENDER CARDS ── */
+    const container = document.getElementById('cards-container');
+
+    materias.forEach((m, i) => {
+        const a     = avg(m);
+        const done  = m.atividades.filter(x => x.status === 'done').length;
+        const total = m.atividades.length;
+
+        const col = document.createElement('div');
+        col.className = 'col-12 mb-3';
+        col.innerHTML = `
+            <div class="card card-outline card-primary subject-card mb-0">
+                <div class="card-header d-flex justify-content-between align-items-start">
+                    <div>
+                        <div class="card-title fw-bold mb-1">${m.nome}</div>
+                        <small class="text-muted">
+                            <i class="bi bi-person me-1"></i>${m.prof}
+                        </small>
+                    </div>
+                    <span class="${presClass(m.presenca)}">${m.presenca}% de presença</span>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3 mb-3">
+                        <div class="col-6 col-md-3">
+                            <div class="text-muted" style="font-size:.75rem">1º Bimestre</div>
+                            <div class="fw-bold fs-5">${m.b1.toFixed(1)}</div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="text-muted" style="font-size:.75rem">2º Bimestre</div>
+                            <div class="fw-bold fs-5">${m.b2.toFixed(1)}</div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="text-muted" style="font-size:.75rem">Média</div>
+                            <div class="fs-5 ${avgClass(a)}">${a.toFixed(2)}</div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="text-muted" style="font-size:.75rem">Atividades</div>
+                            <div class="fw-bold fs-5">${done}/${total}</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm btn-details" data-idx="${i}">
+                        <i class="bi bi-eye me-1"></i>Ver Detalhes
+                    </button>
+                </div>
+            </div>
+        `;
+        container.appendChild(col);
+    });
+
+    /* ── MODAL ── */
+    const bsModal = new bootstrap.Modal(document.getElementById('modalDetalhes'));
+
+    container.addEventListener('click', e => {
+        const btn = e.target.closest('.btn-details');
+        if (!btn) return;
+
+        const m     = materias[+btn.dataset.idx];
+        const a     = avg(m);
+        const done  = m.atividades.filter(x => x.status === 'done').length;
+        const total = m.atividades.length;
+        const pct   = Math.round(done / total * 100);
+
+        document.getElementById('modalDetalhesLabel').textContent = m.nome;
+        document.getElementById('modal-prof').textContent = m.prof;
+
+        const actRows = m.atividades.map(at => `
+            <div class="d-flex justify-content-between align-items-center
+                        px-3 py-2 rounded-2 mb-2"
+                 style="background:#f8fafc;font-size:.875rem">
+                <span>${at.nome}</span>
+                <span class="badge ${statusBadge(at.status)} px-3 py-1"
+                      style="font-size:.75rem">${statusLabel(at.status)}</span>
+            </div>
+        `).join('');
+
+        document.getElementById('modal-body').innerHTML = `
+            <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                    <div class="rounded-3 p-3 text-center" style="background:#f8fafc">
+                        <div class="text-muted mb-1" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.5px">1º Bimestre</div>
+                        <div class="fw-bold fs-4">${m.b1.toFixed(1)}</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="rounded-3 p-3 text-center" style="background:#f8fafc">
+                        <div class="text-muted mb-1" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.5px">2º Bimestre</div>
+                        <div class="fw-bold fs-4">${m.b2.toFixed(1)}</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="rounded-3 p-3 text-center" style="background:#f8fafc">
+                        <div class="text-muted mb-1" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.5px">Média Final</div>
+                        <div class="fw-bold fs-4" style="color:${avgColor(a)}">${a.toFixed(2)}</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="rounded-3 p-3 text-center" style="background:#f8fafc">
+                        <div class="text-muted mb-1" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.5px">Atividades</div>
+                        <div class="fw-bold fs-4">${done}/${total}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="d-flex justify-content-between mb-1" style="font-size:.875rem;font-weight:600">
+                    <span>Frequência</span>
+                    <span style="color:${presColor(m.presenca)}">${m.presenca}%</span>
+                </div>
+                <div class="prog-bar-wrap">
+                    <div class="prog-bar-fill" style="width:${m.presenca}%;background:${presColor(m.presenca)}"></div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="d-flex justify-content-between mb-1" style="font-size:.875rem;font-weight:600">
+                    <span>Atividades concluídas</span>
+                    <span>${done}/${total} (${pct}%)</span>
+                </div>
+                <div class="prog-bar-wrap">
+                    <div class="prog-bar-fill" style="width:${pct}%;background:#0d6efd"></div>
+                </div>
+            </div>
+            <div class="fw-semibold mb-2" style="font-size:.875rem">Lista de Atividades</div>
+            ${actRows}
+        `;
+
+        bsModal.show();
+    });
+</script>
+<!--end::Page Logic-->
+<!--end::Script-->
+
 </body>
 </html>

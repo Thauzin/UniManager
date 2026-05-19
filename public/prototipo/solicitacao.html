@@ -66,8 +66,7 @@
                 <!--begin::Brand Link-->
                 <a href="solicitacao.html" class="brand-link">
                     <!--begin::Brand Image-->
-                    <img src="../assets/img/logo.jpeg" alt="UniManager"
-                        class="brand-image opacity-75 shadow" />
+                    <img src="../assets/img/logo.jpeg" alt="UniManager" class="brand-image opacity-75 shadow" />
                     <!--end::Brand Image-->
                     <!--begin::Brand Text-->
                     <span class="brand-text fw-light"></span>
@@ -86,7 +85,7 @@
                         <li class="nav-item">
                             <a href="../generate/theme.html" class="nav-link">
                                 <i class="nav-icon bi bi-person text-dark"></i>
-                                <p class="text-dark">Secretaria</p>
+                                <p class="text-dark">Aluno</p>
                             </a>
                         </li>
                         <hr>
@@ -99,23 +98,29 @@
                         <li class="nav-item">
                             <a href="../generate/theme.html" class="nav-link">
                                 <i class="nav-icon bi bi-book text-dark"></i>
-                                <p class="text-dark">Usuários</p>
+                                <p class="text-dark">Materias</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="../generate/theme.html" class="nav-link">
                                 <i class="nav-icon bi bi-clipboard-check text-dark"></i>
-                                <p class="text-dark">Solcitações</p>
+                                <p class="text-dark">Atividades</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="../generate/theme.html" class="nav-link">
                                 <i class="nav-icon bi bi-file-earmark-text text-dark"></i>
+                                <p class="text-dark">Solicitações</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../generate/theme.html" class="nav-link">
+                                <i class="nav-icon bi bi-gear text-dark"></i>
                                 <p class="text-dark">Configurações</p>
                             </a>
                         </li>
-                    
-                    <!--end::Sidebar Menu-->
+
+                        <!--end::Sidebar Menu-->
                 </nav>
             </div>
             <!--end::Sidebar Wrapper-->
@@ -145,7 +150,8 @@
                                                 <div class="card w-100">
                                                     <div class="card-header w-100">
                                                         <div class="card-title">Nova Solicitação</div> <br>
-                                                          <small class="text-muted">Preencha os dados para solicitar um serviço</small>
+                                                        <small class="text-muted">Preencha os dados para solicitar um
+                                                            serviço</small>
                                                     </div>
                                                     <!--end::Header-->
                                                     <!--begin::Form-->
@@ -153,11 +159,12 @@
                                                         <!--begin::Body-->
                                                         <div class="card-body">
                                                             <div class="mb-3 w-100">
-                                                                <label for="validationCustom04"
-                                                                    class="form-label">Tipo de Solicitação</label>
+                                                                <label for="validationCustom04" class="form-label">Tipo
+                                                                    de Solicitação</label>
                                                                 <select class="form-select" id="validationCustom04"
                                                                     required>
-                                                                    <option selected disabled value="">Escolha uma opção</option>
+                                                                    <option selected disabled value="">Escolha uma opção
+                                                                    </option>
                                                                     <option>Declaração de Matrícula</option>
                                                                     <option>Histórico Escolar</option>
                                                                     <option>Segunda via de Documentos</option>
@@ -165,10 +172,11 @@
                                                                     <option>Enviar Horas Complementares</option>
                                                                     <option>Outros serviços</option>
                                                                 </select>
-                                                                <div class="invalid-feedback">Por favor selecione uma opção</div>
+                                                                <div class="invalid-feedback">Por favor selecione uma
+                                                                    opção</div>
                                                             </div>
-                                                            <div class="mb-3">  
-                                                                <label for="exampleInputPassword1" 
+                                                            <div class="mb-3">
+                                                                <label for="exampleInputPassword1"
                                                                     class="form-label">Descrição</label>
                                                                 <input type="text" class="form-control"
                                                                     id="exampleInputPassword1" />
@@ -183,8 +191,8 @@
                                                         <!--end::Body-->
                                                         <!--begin::Footer-->
                                                         <div class="card-footer">
-                                                            <button type="submit"
-                                                                class="btn btn-dark">Enviar Solicitação</button>
+                                                            <button type="submit" class="btn btn-dark">Enviar
+                                                                Solicitação</button>
                                                         </div>
                                                         <!--end::Footer-->
                                                     </form>
@@ -303,43 +311,43 @@
                                             </div>
                                             <!-- /.card -->
 
-                                                    <!--begin::JavaScript-->
-                                                    <script>
-                                                        // Example starter JavaScript for disabling form submissions if there are invalid fields
-                                                        (() => {
-                                                            'use strict';
+                                            <!--begin::JavaScript-->
+                                            <script>
+                                                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                                                (() => {
+                                                    'use strict';
 
-                                                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                                                            const forms = document.querySelectorAll('.needs-validation');
+                                                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                                    const forms = document.querySelectorAll('.needs-validation');
 
-                                                            // Loop over them and prevent submission
-                                                            Array.from(forms).forEach((form) => {
-                                                                form.addEventListener(
-                                                                    'submit',
-                                                                    (event) => {
-                                                                        if (!form.checkValidity()) {
-                                                                            event.preventDefault();
-                                                                            event.stopPropagation();
-                                                                        }
+                                                    // Loop over them and prevent submission
+                                                    Array.from(forms).forEach((form) => {
+                                                        form.addEventListener(
+                                                            'submit',
+                                                            (event) => {
+                                                                if (!form.checkValidity()) {
+                                                                    event.preventDefault();
+                                                                    event.stopPropagation();
+                                                                }
 
-                                                                        form.classList.add('was-validated');
-                                                                    },
-                                                                    false,
-                                                                );
-                                                            });
-                                                        })();
-                                                    </script>
-                                                    <!--end::JavaScript-->
-                                                </div>
-                                                <!--end::Form Validation-->
-                                            </div>
-                                            <!--end::Col-->
+                                                                form.classList.add('was-validated');
+                                                            },
+                                                            false,
+                                                        );
+                                                    });
+                                                })();
+                                            </script>
+                                            <!--end::JavaScript-->
                                         </div>
-                                        <!--end::Row-->
+                                        <!--end::Form Validation-->
                                     </div>
-                                    <!--end::Container-->
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::App Content-->
+                                <!--end::Row-->
+                            </div>
+                            <!--end::Container-->
+                        </div>
+                        <!--end::App Content-->
         </main>
         <!--end::App Main-->
         <!--begin::Footer-->

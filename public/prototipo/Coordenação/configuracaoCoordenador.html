@@ -86,37 +86,31 @@
                         <li class="nav-item">
                             <a href="../generate/theme.html" class="nav-link">
                                 <i class="nav-icon bi bi-person text-dark"></i>
-                                <p class="text-dark">Aluno</p>
+                                <p class="text-dark">Secretaria</p>
                             </a>
                         </li>
                         <hr>
                         <li class="nav-item">
-                            <a href="../generate/theme.html" class="nav-link">
+                            <a href="dashboard_secretaria.html" class="nav-link">
                                 <i class="nav-icon bi bi-bar-chart text-dark"></i>
                                 <p class="text-dark">Dashboard</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../generate/theme.html" class="nav-link">
+                            <a href="usuariosSecretaria.html" class="nav-link">
                                 <i class="nav-icon bi bi-book text-dark"></i>
-                                <p class="text-dark">Matérias</p>
+                                <p class="text-dark">Usuários</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../generate/theme.html" class="nav-link">
+                            <a href="solicitacao.html" class="nav-link">
                                 <i class="nav-icon bi bi-clipboard-check text-dark"></i>
-                                <p class="text-dark">Atividades</p>
+                                <p class="text-dark">Solcitações</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../generate/theme.html" class="nav-link">
+                            <a href="configuracoesSecretaria.html" class="nav-link">
                                 <i class="nav-icon bi bi-file-earmark-text text-dark"></i>
-                                <p class="text-dark">Solicitações</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../generate/theme.html" class="nav-link">
-                                <i class="nav-icon bi bi-gear text-dark"></i>
                                 <p class="text-dark">Configurações</p>
                             </a>
                         </li>
@@ -162,7 +156,7 @@
               <div class="mb-3">
                 <label for="nome" class="form-label">Nome Completo</label>
                 <input type="text" class="form-control" id="nome"
-                       value="João Silva" placeholder="Seu nome completo" />
+                       value="" placeholder="Seu nome completo" />
                 <div class="field-feedback" id="nome-err">
                   <i class="bi bi-exclamation-circle-fill"></i>
                   <span id="nome-msg"></span>
@@ -172,7 +166,7 @@
                 <div class="col-md-6">
                   <label for="email" class="form-label">E-mail</label>
                   <input type="email" class="form-control" id="email"
-                         value="aluno@escola.com" placeholder="seu@email.com" />
+                         value="" placeholder="seu email" />
                   <div class="field-feedback" id="email-err">
                     <i class="bi bi-exclamation-circle-fill"></i>
                     <span id="email-msg"></span>
@@ -181,7 +175,7 @@
                 <div class="col-md-6">
                   <label for="telefone" class="form-label">Telefone</label>
                   <input type="tel" class="form-control" id="telefone"
-                         value="(11) 98765-4321" placeholder="(00) 00000-0000"
+                         value="" placeholder="(00) 00000-0000"
                          maxlength="15" />
                   <div class="field-feedback" id="telefone-err">
                     <i class="bi bi-exclamation-circle-fill"></i>
@@ -189,26 +183,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row g-3 mb-4">
-                <div class="col-md-6">
-                  <label for="curso" class="form-label">Curso</label>
-                  <input type="text" class="form-control" id="curso"
-                         value="Engenharia de Software" placeholder="Nome do curso" />
-                  <div class="field-feedback" id="curso-err">
-                    <i class="bi bi-exclamation-circle-fill"></i>
-                    <span id="curso-msg"></span>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <label for="periodo" class="form-label">Período</label>
-                  <input type="text" class="form-control" id="periodo"
-                         value="5º Período" placeholder="Ex: 5º Período" />
-                  <div class="field-feedback" id="periodo-err">
-                    <i class="bi bi-exclamation-circle-fill"></i>
-                    <span id="periodo-msg"></span>
-                  </div>
-                </div>
-              </div>
+              
               <div>
                 <button type="button" class="btn btn-outline-secondary" id="btn-cancel">
                   Cancelar

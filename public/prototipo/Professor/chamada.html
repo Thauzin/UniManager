@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>UniManager | Turmas </title>
+    <title>UniManager | Chamada </title>
 
 
     <!--begin::Accessibility Meta Tags-->
@@ -407,13 +407,12 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h3 class="mb-0">Bem-vindo, João Silva!</h3>
+                            <h3 class="mb-0">Registro de Chamada</h3>
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <ol class="breadcrumb float-sm-start">
-                            <li class="breadcrumb-item active" aria-current="page">Engenharia de Software - 5º Período
-                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Registre a frequência dos alunos</li>
                         </ol>
                     </div>
                 </div>
@@ -423,166 +422,175 @@
                 <div class="container-fluid">
 
                     <!-- Info Boxes -->
+                    <!-- Info Boxes -->
                     <div class="row g-4">
-                        <!-- Disciplinas Cursando -->
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="dashboard-card border">
-                                <div class="card-icon bg-blue">
-                                    <i class="bi bi-book"></i>
-                                </div>
-
-                                <div class="card-content">
-                                    <span class="card-title">Turmas Ativas</span>
-                                    <span class="card-number">4</span>
+                            <div class="info-box bg-white">
+                                <div class="info-box-content text-center">
+                                    <span class="info-box-text text-muted fw-semibold">Presentes</span>
+                                    <span class="info-box-number fs-2 fw-bold" style="color:#20c963;">4</span>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Atividades Pendentes -->
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="dashboard-card border">
-                                <div class="card-icon bg-orange">
-                                    <i class="bi bi-clipboard-check"></i>
-                                </div>
-
-                                <div class="card-content">
-                                    <span class="card-title">Total de ALunos</span>
-                                    <span class="card-number">120</span>
+                            <div class="info-box bg-white">
+                                <div class="info-box-content text-center">
+                                    <span class="info-box-text text-muted fw-semibold">Ausentes</span>
+                                    <span class="info-box-number fs-2 fw-bold" style="color:#f4622a;">1</span>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Frequência Geral -->
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="dashboard-card border">
-                                <div class="card-icon bg-green">
-                                    <i class="bi bi-graph-up-arrow"></i>
-                                </div>
-
-                                <div class="card-content">
-                                    <span class="card-title">Disciplinas</span>
-                                    <span class="card-number">3</span>
+                            <div class="info-box bg-white">
+                                <div class="info-box-content text-center">
+                                    <span class="info-box-text text-muted fw-semibold">Justificados</span>
+                                    <span class="info-box-number fs-2 fw-bold" style="color:#d97706;">0</span>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Média Geral -->
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="dashboard-card border">
-                                <div class="card-icon bg-purple">
-                                    <i class="bi bi-graph-up"></i>
-                                </div>
-
-                                <div class="card-content">
-                                    <span class="card-title">Aulas esta Semana</span>
-                                    <span class="card-number">12</span>
+                            <div class="info-box bg-white">
+                                <div class="info-box-content text-center">
+                                    <span class="info-box-text text-muted fw-semibold">Pendentes</span>
+                                    <span class="info-box-number fs-2 fw-bold" style="color:#d97706;">0</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- /.row -->
 
-                    <!-- Card Próximas Atividades -->
+                    <!-- Registro de Chamada -->
+                    <!-- Card Registro de Chamada -->
                     <div class="row mt-4">
                         <div class="col-12">
                             <div class="shadow-none card custom-card mb-4">
                                 <div class="card-header border-0 pb-0">
-                                    <h5 class="card-title mb-1">Próximas Aulas</h5>
-                                    <br>
-                                    <small class="text-muted">Agenda de aula desta semana</small>
+                                    <h5 class="card-title mb-3">Informações da Aula</h5>
+                                    <div class="row g-3 mb-2">
+                                        <div class="col-12 col-md-4">
+                                            <label class="form-label text-muted fw-semibold">Data da Aula</label>
+                                            <input type="date" class="form-control bg-light border-0" id="dataAula" />
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <label class="form-label text-muted fw-semibold">Disciplina</label>
+                                            <select class="form-select bg-light border-0">
+                                                <option value="">Selecione a disciplina</option>
+                                                <option>Programação Web</option>
+                                                <option>Banco de Dados</option>
+                                                <option>Engenharia de Software</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <label class="form-label text-muted fw-semibold">Turma</label>
+                                            <select class="form-select bg-light border-0">
+                                                <option value="">Selecione a turma</option>
+                                                <option>Engenharia 5A</option>
+                                                <option>Engenharia 5B</option>
+                                                <option>Engenharia 5C</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="card-body d-flex flex-column gap-3">
-
-                                    <div class="activity-item">
-                                        <div class="activity-icon">
-                                            <i class="bi bi-clipboard-check"></i>
-                                        </div>
-
-                                        <div class="activity-info">
-                                            <div class="activity-title">Projeto Web</div>
-                                            <div class="activity-subtitle">Engenharia 5A</div>
-                                            <div class="activity-subtitle">Segunda-feira • 08:00 - 10:00</div>
-                                        </div>
-
-                                        <span class="activity-date">15/08/2026</span>
+                                <div class="card-body">
+                                    <!-- Cabeçalho da lista -->
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="fw-semibold">Lista de Presença</span>
+                                        <button class="btn btn-outline-secondary rounded-3 px-4" onclick="marcarTodosPresentes()">
+                                            Marcar Todos Presentes
+                                        </button>
                                     </div>
 
-                                    <div class="activity-item">
-                                        <div class="activity-icon">
-                                            <i class="bi bi-clipboard-check"></i>
+                                    <!-- Lista de alunos -->
+                                    <div class="d-flex flex-column gap-2" id="lista-alunos">
+
+                                        <div class="activity-item" id="aluno-1">
+                                            <div class="activity-icon" id="icon-1" style="background:#e6f9f0;">
+                                                <i class="bi bi-check-circle" style="color:#20c963;"></i>
+                                            </div>
+                                            <div class="activity-info">
+                                                <div class="activity-title">João Silva</div>
+                                                <div class="activity-subtitle">Matrícula: 2021001</div>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-presente-1" onclick="setStatus(1, 'presente')">Presente</button>
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-ausente-1" onclick="setStatus(1, 'ausente')">Ausente</button>
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-justificado-1" onclick="setStatus(1, 'justificado')">Justificado</button>
+                                            </div>
                                         </div>
 
-                                        <div class="activity-info">
-                                            <div class="activity-title">Banco de Dados</div>
-                                            <div class="activity-subtitle">Engenharia 5B</div>
-                                            <div class="activity-subtitle">Quarta-feira • 14:00 - 16:00</div>
+                                        <div class="activity-item" id="aluno-2">
+                                            <div class="activity-icon" id="icon-2" style="background:#e6f9f0;">
+                                                <i class="bi bi-check-circle" style="color:#20c963;"></i>
+                                            </div>
+                                            <div class="activity-info">
+                                                <div class="activity-title">Maria Santos</div>
+                                                <div class="activity-subtitle">Matrícula: 2021002</div>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-presente-2" onclick="setStatus(2, 'presente')">Presente</button>
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-ausente-2" onclick="setStatus(2, 'ausente')">Ausente</button>
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-justificado-2" onclick="setStatus(2, 'justificado')">Justificado</button>
+                                            </div>
                                         </div>
 
-                                        <span class="activity-date">18/08/2026</span>
+                                        <div class="activity-item" id="aluno-3">
+                                            <div class="activity-icon" id="icon-3" style="background:#e6f9f0;">
+                                                <i class="bi bi-check-circle" style="color:#20c963;"></i>
+                                            </div>
+                                            <div class="activity-info">
+                                                <div class="activity-title">Pedro Oliveira</div>
+                                                <div class="activity-subtitle">Matrícula: 2021003</div>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-presente-3" onclick="setStatus(3, 'presente')">Presente</button>
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-ausente-3" onclick="setStatus(3, 'ausente')">Ausente</button>
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-justificado-3" onclick="setStatus(3, 'justificado')">Justificado</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="activity-item" id="aluno-4">
+                                            <div class="activity-icon" id="icon-4" style="background:#e6f9f0;">
+                                                <i class="bi bi-check-circle" style="color:#20c963;"></i>
+                                            </div>
+                                            <div class="activity-info">
+                                                <div class="activity-title">Ana Paula</div>
+                                                <div class="activity-subtitle">Matrícula: 2021004</div>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-presente-4" onclick="setStatus(4, 'presente')">Presente</button>
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-ausente-4" onclick="setStatus(4, 'ausente')">Ausente</button>
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-justificado-4" onclick="setStatus(4, 'justificado')">Justificado</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="activity-item" id="aluno-5">
+                                            <div class="activity-icon" id="icon-5" style="background:#e6f9f0;">
+                                                <i class="bi bi-check-circle" style="color:#20c963;"></i>
+                                            </div>
+                                            <div class="activity-info">
+                                                <div class="activity-title">Carlos Eduardo</div>
+                                                <div class="activity-subtitle">Matrícula: 2021005</div>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-presente-5" onclick="setStatus(5, 'presente')">Presente</button>
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-ausente-5" onclick="setStatus(5, 'ausente')">Ausente</button>
+                                                <button class="btn btn-outline-secondary rounded-3" id="btn-justificado-5" onclick="setStatus(5, 'justificado')">Justificado</button>
+                                            </div>
+                                        </div>
+
                                     </div>
 
-                                    <div class="activity-item">
-                                        <div class="activity-icon">
-                                            <i class="bi bi-clipboard-check"></i>
-                                        </div>
-
-                                        <div class="activity-info">
-                                            <div class="activity-title">Programação Web</div>
-                                            <div class="activity-subtitle">Engenharia 5C</div>
-                                            <div class="activity-subtitle">Sexta-feira • 10:00 - 12:00</div>
-                                        </div>
-                                        <span class="activity-date">20/08/2026</span>
+                                    <!-- Botão salvar -->
+                                    <div class="d-flex justify-content-end mt-4">
+                                        <button class="btn btn-dark rounded-3 px-5" onclick="salvarChamada()">Salvar Chamada</button>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /.row -->
-                    <!-- Card Matérias das Turmas  -->
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <div class="shadow-none card custom-card mb-4">
-                                <div class="card-header border-0 pb-0">
-                                    <h5 class="card-title mb-1">Avisos Importantes</h5>
-                                </div>
-
-                                <div class="card-body d-flex flex-column gap-3">
-
-                                    <!-- Aviso amarelo -->
-                                    <div class="alert-item alert-warning-custom">
-                                        <div class="alert-icon">
-                                            <i class="bi bi-exclamation-circle"></i>
-                                        </div>
-
-                                        <div class="alert-content">
-                                            <div class="alert-title">Período de Matrícula</div>
-                                            <div class="alert-text">
-                                                As matrículas para o próximo semestre estarão abertas de
-                                                20/03 a 30/03.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Aviso azul -->
-                                    <div class="alert-item alert-info-custom">
-                                        <div class="alert-icon">
-                                            <i class="bi bi-info-circle"></i>
-                                        </div>
-
-                                        <div class="alert-content">
-                                            <div class="alert-title">Semana de Provas</div>
-                                            <div class="alert-text">
-                                                As avaliações finais acontecerão entre 25/03 e 29/03.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
+                    
                     <!-- /.row -->
 
                 </div>

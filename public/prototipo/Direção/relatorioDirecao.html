@@ -173,7 +173,25 @@
             color: #2563eb;
         }
 
-         /* ── Filtros ── */
+        .btn-style-rel {
+            background-color: white;
+            border: 1px solid black;
+            color: #3e4044;
+        }
+
+        /* hover */
+        .btn-style-rel:hover {
+            background-color: #a7f3d0;
+        }
+
+        /* selecionado */
+        .btn-check:checked+.btn-style-rel {
+            background-color: #3793b8;
+            border-color: #296279;
+            color: #000;
+        }
+
+        /* ── Filtros ── */
         .filter-card {
             background: #fff;
             border: 1px solid #e5e7eb;
@@ -181,36 +199,38 @@
             padding: 20px 24px;
             margin-bottom: 24px;
         }
-        .filter-card h6 { 
-            font-weight: 700; 
-            font-size: 1rem; 
-            color: #111827; 
-            margin-bottom: 2px; 
+
+        .filter-card h6 {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #111827;
+            margin-bottom: 2px;
         }
 
-        .filter-card p  { 
-            font-size: 0.82rem; 
-            color: #6b7280; 
-            margin-bottom: 16px; 
+        .filter-card p {
+            font-size: 0.82rem;
+            color: #6b7280;
+            margin-bottom: 16px;
         }
 
-        .filter-row { 
-            display: flex; 
-            gap: 12px; 
-            flex-wrap: wrap; 
+        .filter-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
-        .filter-group { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 4px; flex: 1; 
-            min-width: 130px; 
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 130px;
         }
 
-        .filter-group label { 
-            font-size: 0.78rem; 
-            font-weight: 600; 
-            color: #374151; 
+        .filter-group label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #374151;
         }
 
         .filter-group select {
@@ -227,11 +247,11 @@
             cursor: pointer;
         }
 
-        .filter-group select:focus { 
-            outline: 2px solid #3b82f6; 
-            border-color: transparent; 
+        .filter-group select:focus {
+            outline: 2px solid #3b82f6;
+            border-color: transparent;
         }
-        
+
         /* ── Cards de gráfico ── */
         .chart-card {
             background: #fff;
@@ -239,24 +259,24 @@
             border-radius: 16px;
             padding: 20px;
         }
-        .chart-card h6 { 
-            font-weight: 700; 
-            font-size: 0.97rem; 
-            color: #111827; 
-            margin-bottom: 2px; 
+
+        .chart-card h6 {
+            font-weight: 700;
+            font-size: 0.97rem;
+            color: #111827;
+            margin-bottom: 2px;
         }
 
-        .chart-card p  { 
-            font-size: 0.78rem; 
-            color: #6b7280; 
-            margin-bottom: 14px; 
+        .chart-card p {
+            font-size: 0.78rem;
+            color: #6b7280;
+            margin-bottom: 14px;
         }
 
-        .chart-wrapper { 
-            position: relative; 
-            height: 220px; 
+        .chart-wrapper {
+            position: relative;
+            height: 220px;
         }
-
     </style>
 </head>
 
@@ -280,7 +300,7 @@
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
                         aria-label="Main navigation" data-accordion="false" id="navigation">
                         <hr>
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a href="../Direção/dashboard_direcao.html" class="nav-link">
                                 <i class="nav-icon bi bi-person text-dark"></i>
                                 <p class="text-dark">Direção</p>
@@ -295,7 +315,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="../Direção/relatorioDirecao.html" class="nav-link">
-                                <i class="nav-icon bi bi-people-fill text-dark"></i>
+                                <i class="nav-icon bi bi-clipboard-data text-dark"></i>
                                 <p class="text-dark">Relatórios</p>
                             </a>
                         </li>
@@ -318,207 +338,56 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h3 class="mb-0">Dashboard Analítico</h3>
+                            <h3 class="mb-0">Exportar Relatórios</h3>
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <ol class="breadcrumb float-sm-start">
-                            <li class="breadcrumb-item active" aria-current="page">Análise de desempenho acadêmico e métricas institucionais</li>
+                            <li class="breadcrumb-item active" aria-current="page">Selecione os filtros e faça o
+                                download dos dados consolidados</li>
                         </ol>
                     </div>
                 </div>
             </div>
-
-
             <!--FILTROS DE ANÁLISE-->
-            
 
-            
             <!-- Page Content -->
             <div class="app-content">
-                <div class="container-fluid">
+                <!-- Cards de estatísticas -->
 
-                    <!-- Filtros de Análise -->
-                     <div class="filter-card mb-3">
-                        <h6>Filtros de Análise</h6>
-                        <p>Personalize a visualização dos dados</p>
-                        <div class="filter-row">
-                            <div class="filter-group">
-                            <label>Coordenador</label>
-                            <select>
-                                <option>Todos</option>
-                                <option>Ana Lima</option>
-                                <option>Carlos Souza</option>
-                            </select>
-                            </div>
-                            <div class="filter-group">
-                            <label>Professor</label>
-                            <select>
-                                <option>Todos</option>
-                                <option>Prof. Silva</option>
-                                <option>Prof. Oliveira</option>
-                            </select>
-                            </div>
-                            <div class="filter-group">
-                            <label>Curso</label>
-                            <select>
-                                <option>Todos</option>
-                                <option>Eng. Software</option>
-                            </select>
-                            </div>
-                            <div class="filter-group">
-                            <label>Período</label>
-                            <select>
-                                <option>Todos</option>
-                                <option>1º Semestre</option>
-                                <option>2º Semestre</option>
-                            </select>
-                            </div>
-                            <div class="filter-group">
-                            <label>Data</label>
-                            <select>
-                                <option>Último mês</option>
-                                <option>Último trimestre</option>
-                                <option>Último ano</option>
-                            </select>
-                            </div>
-                        </div>
-                        </div>
-
-                    <!-- Cards de estatísticas -->
-                    <div class="row g-3 mb-3 mt-3">
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box shadow-sm border-0 rounded-3 bg-white p-3 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <div class="text-muted fw-semibold mb-1" style="font-size: 0.85rem;">Mpedia Geral</div>
-                                    <div class="fs-2 fw-bold text-dark lh-1">8.5</div>
-                                    <div class="text-muted mt-1" style="font-size: 0.82rem;">+0.3 vs mês anterior</div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center rounded-3"
-                                    style="width:48px; height:48px; background:#eef4ff; flex-shrink:0;">
-                                    <i class="bi bi-people" style="font-size:1.4rem; color:#2563eb;"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box shadow-sm border-0 rounded-3 bg-white p-3 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <div class="text-muted fw-semibold mb-1" style="font-size: 0.85rem;">Frequência Média</div>
-                                    <div class="fs-2 fw-bold text-dark lh-1">89.5%</div>
-                                    <div class="text-muted mt-1" style="font-size: 0.82rem;">+2.1% vs mês anterior</div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center rounded-3"
-                                    style="width:48px; height:48px; background:#fff4e5; flex-shrink:0;">
-                                    <i class="bi bi-clipboard" style="font-size:1.4rem; color:#f97316;"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box shadow-sm border-0 rounded-3 bg-white p-3 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <div class="text-muted fw-semibold mb-1" style="font-size: 0.85rem;">Total de Turmas</div>
-                                    <div class="fs-2 fw-bold text-dark lh-1">24</div>
-                                    <div class="text-muted mt-1" style="font-size: 0.82rem;">6 cursos diferentes</div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center rounded-3"
-                                    style="width:48px; height:48px; background:#ecfdf3; flex-shrink:0;">
-                                    <i class="bi bi-calendar-check" style="font-size:1.4rem; color:#16a34a;"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box shadow-sm border-0 rounded-3 bg-white p-3 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <div class="text-muted fw-semibold mb-1" style="font-size: 0.85rem;">Alunos Ativos</div>
-                                    <div class="fs-2 fw-bold text-dark lh-1">750</div>
-                                    <div class="text-muted mt-1" style="font-size: 0.82rem;">98% de frequência</div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center rounded-3"
-                                    style="width:48px; height:48px; background:#f5f0ff; flex-shrink:0;">
-                                    <i class="bi bi-check-circle" style="font-size:1.4rem; color:#7c3aed;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Gráficos de Linha -->
-                    <div class="row g-3 mb-3">
+                <!-- Gráficos de Linha -->
+                <div class="row g-3 mb-3">
                     <div class="col-12 col-md-6">
                         <div class="chart-card shadow-sm">
-                        <h6>Evolução das Notas - 2026</h6>
-                        <p>Média mensal das notas dos alunos</p>
-                        <div class="chart-wrapper"><canvas id="chartMensal"></canvas></div>
+                            <h6>Selecione o tipo de Relatório</h6>
+                            <p>Escolha um tipo de relatório</p>
+                            <input type="radio" class="btn-check" name="status" id="aluno" autocomplete="off">
+                            <label class="btn btn-style-rel" for="aluno">
+                                <i class="bi  me-1"></i>
+                                👩🏽‍🎓 Alunos
+                            </label>
+                            <input type="radio" class="btn-check" name="status" id="professor" autocomplete="off">
+                            <label class="btn btn-style-rel" for="professor">
+                                <i class="bi me-1"></i>
+                                👩🏽‍🏫 Professores
+                            </label>
+                            <input type="radio" class="btn-check" name="status" id="secretaria" autocomplete="off">
+                            <label class="btn btn-style-rel" for="secretaria">
+                                <i class="bi me-1"></i>
+                                👩🏽‍💼 Secretaria
+                            </label>
+                            <input type="radio" class="btn-check" name="status" id="curso" autocomplete="off">
+                            <label class="btn btn-style-rel" for="curso">
+                                <i class="bi me-1"></i>
+                                📚 Curso
+                            </label>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="chart-card shadow-sm">
-                        <h6>Evolução das Notas por Ano</h6>
-                        <p>Tendência histórica de desempenho</p>
-                        <div class="chart-wrapper"><canvas id="chartAnual"></canvas></div>
-                        </div>
-                    </div>
-                    </div>
-                    
-                    <!-- Gráficos de Barra -->
-                    <div class="row g-3 mb-3">
-                    <div class="col-12 col-md-6">
-                        <div class="chart-card shadow-sm">
-                        <h6>Frequência por Disciplina</h6>
-                        <p>Comparativo de presença entre disciplinas</p>
-                        <div class="chart-wrapper"><canvas id="chartFrequencia"></canvas></div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="chart-card shadow-sm">
-                        <h6>Desempenho por Turma</h6>
-                        <p>Média de notas por turma</p>
-                        <div class="chart-wrapper"><canvas id="chartTurma"></canvas></div>
-                        </div>
-                    </div>
-                    </div>
-                    
-                   
-
-                    <!-- Card Próximas Atividades -->
-                    <!-- Card Desempenho por Curso -->
-                    <div class="row g-3 mt-2">  
-                        <div class="col-12">
-                            <div class="card shadow-sm border-0 rounded-3 bg-white">
-                                <div class="card-header border-0 pb-0 pt-4 px-4">
-                                    <h5 class="fw-bold mb-0">Insights e Análise Preditiva</h5>
-                                </div>
-                                <div class="card-body d-flex flex-column gap-3 px-4 pb-4">
-
-                                    <!-- Curso 1 -->
-                                    <div class="border rounded-3 p-3" style="background:#f0fdf4; border-color:#bbf7d0 !important;">
-                                        <div class="d-flex align-items-center gap-2 mb-1">
-                                            <i class="bi bi-graph-up-arrow" style="color:#16a34a; font-size:1.1rem;"></i>
-                                            <span class="fw-bold" style="font-size: 1rem;">Tendência Positiva</span>
-                                        </div>
-                                        <p class="mb-0 text-muted" style="font-size:0.9rem;">A média geral das notas apresentou crescimento de 3.5% nos últimos 3 meses, indicando melhoria no desempenho acadêmico geral.</p>
-                                    </div>
-
-                                    <!-- Curso 2 -->
-                                    <div class="border rounded-3 p-3" style="background:#eff6ff; border-color:#bfdbfe !important;">
-                                        <div class="d-flex align-items-center gap-2 mb-1">
-                                            <i class="bi bi-people" style="color:#2563eb; font-size:1.1rem;"></i>
-                                            <span class="fw-bold" style="font-size: 1rem;">Destaque em Frequência</span>
-                                        </div>
-                                        <p class="mb-0 text-muted" style="font-size:0.9rem;">A disciplina de Inteligência Artificial mantém a maior frequência (95%), enquanto Redes de Computadores requer atenção (85%).</p>
-                                    </div>
-
-                                    <!-- Curso 3 -->
-                                    <div class="border rounded-3 p-3" style="background:#faf5ff; border-color:#e9d5ff !important;">
-                                        <div class="d-flex align-items-center gap-2 mb-1">
-                                            <i class="bi bi-book" style="color:#7c3aed; font-size:1.1rem;"></i>
-                                            <span class="fw-bold" style="font-size: 1rem;">Previsão de Desempenho</span>
-                                        </div>
-                                        <p class="mb-0 text-muted" style="font-size:0.9rem;">Baseado nas tendências atuais, estima-se que a média geral do próximo semestre ficará entre 8.7 e 9.0, mantendo a trajetória de crescimento.</p>
-                                    </div>
-                                </div>
+                            <h6>Resumo do Relatório</h6>
+                            <p>Informações que vão constar no relatório</p>
+                            <div id="resumo">
                             </div>
                         </div>
                     </div>
@@ -569,8 +438,181 @@
             }
         });
 
+        document.querySelectorAll('input[name="status"]').forEach(el => {
+            el.addEventListener('change', function () {
 
-         // Configuração padrão de tooltip 
+                const resumo = document.getElementById('resumo');
+
+                if (this.id === 'aluno') {
+                    resumo.innerHTML = ` <h5> Relatório - Alunos </h5>
+                    <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th># Coluna/Campo</th>
+                                        <th>Tipo De Dado</th>
+                                        <th>Descrição</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Aluno</td>
+                                        <td><span class="badge bg-warning badge-md">Texto</span></td>
+                                        <td>Nome do Aluno</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Curso</td>
+                                        <td><span class="badge bg-warning badge-md">Texto</span></td>
+                                        <td>Curso Matriculado</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Frequência</td>
+                                        <td><span class="badge bg-info badge-md">Percentual</span></td>
+                                        <td>Percentual de Frequência</td>
+                                    </tr>
+                                </tbody>
+                                    <tbody>
+                                    <tr class="align-middle">
+                                        <td>Média</td>
+                                        <td><span class="badge bg-success badge-md">Númerico</span></td>
+                                        <td>Média das notas</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    `;
+                }
+
+                if (this.id === 'professor') {
+                    resumo.innerHTML = ` <h5> Relatório - Professores </h5>
+                    <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th># Coluna/Campo</th>
+                                        <th>Tipo De Dado</th>
+                                        <th>Descrição</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Professor</td>
+                                        <td><span class="badge bg-warning badge-md">Texto</span></td>
+                                        <td>Nome do Professor</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Turmas</td>
+                                        <td><span class="badge bg-success badge-md">Numérico</span></td>
+                                        <td>Quantidade de Turmas</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Alunos</td>
+                                        <td><span class="badge bg-success badge-md">Numérico</span></td>
+                                        <td>Quantidade de Alunos</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    `;
+                }
+                if (this.id === 'secretaria') {
+                    resumo.innerHTML = ` <h5> Relatório - Secretaria </h5>
+                    <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th># Coluna/Campo</th>
+                                        <th>Tipo De Dado</th>
+                                        <th>Descrição</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Solicitação</td>
+                                        <td><span class="badge bg-warning badge-md">Texto</span></td>
+                                        <td>Tipo de Solicitação</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Quantidade</td>
+                                        <td><span class="badge bg-success badge-md">Numérico</span></td>
+                                        <td>Quantidade de Solicitações</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Tempo</td>
+                                        <td><span class="badge bg-danger badge-md">Data</span></td>
+                                        <td>Tempo médio para resolução</td>
+                                    </tr>
+                                </tbody>
+                                    <tbody>
+                                    <tr class="align-middle">
+                                        <td>Resoluções</td>
+                                        <td><span class="badge bg-info badge-md">Percentual</span></td>
+                                        <td>Percentual de resoluções</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    `;
+                }
+                if (this.id === 'curso') {
+                    resumo.innerHTML = ` <h5> Relatório - Professores </h5>
+                    <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th># Coluna/Campo</th>
+                                        <th>Tipo De Dado</th>
+                                        <th>Descrição</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Curso</td>
+                                        <td><span class="badge bg-warning badge-md">Texto</span></td>
+                                        <td>Nome do Curso</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Turmas</td>
+                                        <td><span class="badge bg-success badge-md">Numérico</span></td>
+                                        <td>Quantidade de Turmas</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr class="align-middle">
+                                        <td>Média</td>
+                                        <td><span class="badge bg-success badge-md">Numérico</span></td>
+                                        <td>Média do curso</td>
+                                    </tr>
+                                </tbody>
+                                    <tbody>
+                                    <tr class="align-middle">
+                                        <td>Frequência</td>
+                                        <td><span class="badge bg-info badge-md">Percentual</span></td>
+                                        <td>Frequência do curso</td>
+                                    </tr>
+                                </tbody>
+                                    <tbody>
+                                    <tr class="align-middle">
+                                        <td>Professores</td>
+                                        <td><span class="badge bg-warning badge-md">Texto</span></td>
+                                        <td>Quantidade de Professores</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    `;
+                }
+
+            });
+        });
+
+        // Configuração padrão de tooltip 
         const tooltipDefaults = {
             backgroundColor: '#fff',
             borderColor: '#e5e7eb',
@@ -581,165 +623,166 @@
             bodyFont: { size: 13 },
             displayColors: true
         };
-        
+
         // ── Gráfico 1: Linha Mensal ─────────────────────────────────
         new Chart(document.getElementById('chartMensal'), {
             type: 'line',
             data: {
-            labels: ['Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-            datasets: [{
-                label: 'Média',
-                data: [7.1, 7.4, 7.6, 7.7, 7.9, 8.0, 7.9, 8.1, 8.3, 8.5],
-                borderColor: '#3b82f6',
-                backgroundColor: 'rgba(59,130,246,0.07)',
-                tension: 0.35,
-                pointRadius: 5,
-                pointHoverRadius: 7,
-                pointBackgroundColor: '#3b82f6',
-                fill: false
-            }]
+                labels: ['Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: [{
+                    label: 'Média',
+                    data: [7.1, 7.4, 7.6, 7.7, 7.9, 8.0, 7.9, 8.1, 8.3, 8.5],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59,130,246,0.07)',
+                    tension: 0.35,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#3b82f6',
+                    fill: false
+                }]
             },
             options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: { min: 0, max: 10, grid: { color: '#f3f4f6' }, ticks: { color: '#9ca3af', stepSize: 3 } },
-                x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
-            },
-            plugins: {
-                tooltip: {
-                ...tooltipDefaults,
-                titleColor: '#374151',
-                bodyColor: '#3b82f6',
-                callbacks: {
-                    title: (items) => items[0].label,
-                    label: (item) => `Média : ${item.raw}`
-                }
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { min: 0, max: 10, grid: { color: '#f3f4f6' }, ticks: { color: '#9ca3af', stepSize: 3 } },
+                    x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
                 },
-                legend: {
-                labels: { usePointStyle: true, pointStyle: 'circle', color: '#6b7280', font: { size: 12 } }
+                plugins: {
+                    tooltip: {
+                        ...tooltipDefaults,
+                        titleColor: '#374151',
+                        bodyColor: '#3b82f6',
+                        callbacks: {
+                            title: (items) => items[0].label,
+                            label: (item) => `Média : ${item.raw}`
+                        }
+                    },
+                    legend: {
+                        labels: { usePointStyle: true, pointStyle: 'circle', color: '#6b7280', font: { size: 12 } }
+                    }
                 }
-            }
             }
         });
-        
+
         // ── Gráfico 2: Linha Anual ──────────────────────────────────
         new Chart(document.getElementById('chartAnual'), {
             type: 'line',
             data: {
-            labels: ['2022','2023','2024','2025','2026'],
-            datasets: [{
-                label: 'Média',
-                data: [7.0, 7.3, 7.7, 8.1, 8.5],
-                borderColor: '#10b981',
-                backgroundColor: 'rgba(16,185,129,0.07)',
-                tension: 0.35,
-                pointRadius: 5,
-                pointHoverRadius: 7,
-                pointBackgroundColor: '#10b981',
-                fill: false
-            }]
+                labels: ['2022', '2023', '2024', '2025', '2026'],
+                datasets: [{
+                    label: 'Média',
+                    data: [7.0, 7.3, 7.7, 8.1, 8.5],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16,185,129,0.07)',
+                    tension: 0.35,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#10b981',
+                    fill: false
+                }]
             },
             options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: { min: 0, max: 10, grid: { color: '#f3f4f6' }, ticks: { color: '#9ca3af', stepSize: 3 } },
-                x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
-            },
-            plugins: {
-                tooltip: {
-                ...tooltipDefaults,
-                titleColor: '#374151',
-                bodyColor: '#10b981',
-                callbacks: {
-                    title: (items) => items[0].label,
-                    label: (item) => `Média : ${item.raw}`
-                }
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { min: 0, max: 10, grid: { color: '#f3f4f6' }, ticks: { color: '#9ca3af', stepSize: 3 } },
+                    x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
                 },
-                legend: {
-                labels: { usePointStyle: true, pointStyle: 'circle', color: '#6b7280', font: { size: 12 } }
+                plugins: {
+                    tooltip: {
+                        ...tooltipDefaults,
+                        titleColor: '#374151',
+                        bodyColor: '#10b981',
+                        callbacks: {
+                            title: (items) => items[0].label,
+                            label: (item) => `Média : ${item.raw}`
+                        }
+                    },
+                    legend: {
+                        labels: { usePointStyle: true, pointStyle: 'circle', color: '#6b7280', font: { size: 12 } }
+                    }
                 }
-            }
             }
         });
-        
+
         // ── Gráfico 3: Barras Frequência por Disciplina ─────────────
         new Chart(document.getElementById('chartFrequencia'), {
             type: 'bar',
             data: {
-            labels: ['Banco Dados','Eng. Software','Redes','S.O.','I.A.'],
-            datasets: [{
-                label: 'Frequência (%)',
-                data: [93, 90, 91, 86, 88],
-                backgroundColor: 'rgba(139,92,246,0.8)',
-                hoverBackgroundColor: 'rgba(109,40,217,0.95)',
-                borderRadius: 6,
-                borderSkipped: false
-            }]
+                labels: ['Banco Dados', 'Eng. Software', 'Redes', 'S.O.', 'I.A.'],
+                datasets: [{
+                    label: 'Frequência (%)',
+                    data: [93, 90, 91, 86, 88],
+                    backgroundColor: 'rgba(139,92,246,0.8)',
+                    hoverBackgroundColor: 'rgba(109,40,217,0.95)',
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
             },
             options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: { min: 0, max: 100, grid: { color: '#f3f4f6' }, ticks: { color: '#9ca3af', stepSize: 25 } },
-                x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 11 } } }
-            },
-            plugins: {
-                tooltip: {
-                ...tooltipDefaults,
-                titleColor: '#374151',
-                bodyColor: '#8b5cf6',
-                callbacks: {
-                    title: (items) => items[0].label,
-                    label: (item) => `Frequência (%) : ${item.raw}`
-                }
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { min: 0, max: 100, grid: { color: '#f3f4f6' }, ticks: { color: '#9ca3af', stepSize: 25 } },
+                    x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 11 } } }
                 },
-                legend: {
-                labels: { usePointStyle: true, pointStyle: 'rect', color: '#6b7280', font: { size: 12 } }
+                plugins: {
+                    tooltip: {
+                        ...tooltipDefaults,
+                        titleColor: '#374151',
+                        bodyColor: '#8b5cf6',
+                        callbacks: {
+                            title: (items) => items[0].label,
+                            label: (item) => `Frequência (%) : ${item.raw}`
+                        }
+                    },
+                    legend: {
+                        labels: { usePointStyle: true, pointStyle: 'rect', color: '#6b7280', font: { size: 12 } }
+                    }
                 }
-            }
             }
         });
-        
+
         // ── Gráfico 4: Barras Desempenho por Turma ──────────────────
         new Chart(document.getElementById('chartTurma'), {
             type: 'bar',
             data: {
-            labels: ['Eng 5A','Eng 5B','Eng 5C','Eng 6A','Eng 6B','Eng 7A'],
-            datasets: [{
-                label: 'Média',
-                data: [8.1, 7.5, 7.9, 8.6, 8.0, 8.3],
-                backgroundColor: 'rgba(251,146,60,0.85)',
-                hoverBackgroundColor: 'rgba(234,88,12,1)',
-                borderRadius: 6,
-                borderSkipped: false
-            }]
+                labels: ['Eng 5A', 'Eng 5B', 'Eng 5C', 'Eng 6A', 'Eng 6B', 'Eng 7A'],
+                datasets: [{
+                    label: 'Média',
+                    data: [8.1, 7.5, 7.9, 8.6, 8.0, 8.3],
+                    backgroundColor: 'rgba(251,146,60,0.85)',
+                    hoverBackgroundColor: 'rgba(234,88,12,1)',
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
             },
             options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: { min: 0, max: 10, grid: { color: '#f3f4f6' }, ticks: { color: '#9ca3af', stepSize: 3 } },
-                x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 11 } } }
-            },
-            plugins: {
-                tooltip: {
-                ...tooltipDefaults,
-                titleColor: '#374151',
-                bodyColor: '#f97316',
-                callbacks: {
-                    title: (items) => items[0].label,
-                    label: (item) => `Média : ${item.raw}`
-                }
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { min: 0, max: 10, grid: { color: '#f3f4f6' }, ticks: { color: '#9ca3af', stepSize: 3 } },
+                    x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 11 } } }
                 },
-                legend: {
-                labels: { usePointStyle: true, pointStyle: 'rect', color: '#6b7280', font: { size: 12 } }
+                plugins: {
+                    tooltip: {
+                        ...tooltipDefaults,
+                        titleColor: '#374151',
+                        bodyColor: '#f97316',
+                        callbacks: {
+                            title: (items) => items[0].label,
+                            label: (item) => `Média : ${item.raw}`
+                        }
+                    },
+                    legend: {
+                        labels: { usePointStyle: true, pointStyle: 'rect', color: '#6b7280', font: { size: 12 } }
+                    }
                 }
-            }
             }
         });
     </script>
 
 </body>
+
 </html>

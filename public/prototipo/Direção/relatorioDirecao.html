@@ -179,6 +179,18 @@
             color: #3e4044;
         }
 
+        .btn-gerar {
+            background-color: white;
+            border: 1px solid black;
+            color: #3e4044;
+        }
+
+        .btn-gerar:hover {
+            background-color: #3793b8;
+            border-color: #296279;
+            color: #000;
+        }
+
         /* hover */
         .btn-style-rel:hover {
             background-color: #a7f3d0;
@@ -362,17 +374,17 @@
                             <h6>Selecione o tipo de Relatório</h6>
                             <p>Escolha um tipo de relatório</p>
                             <input type="radio" class="btn-check" name="status" id="aluno" autocomplete="off">
-                            <label class="btn btn-style-rel" for="aluno">
+                            <label class="me-2 btn btn-style-rel" for="aluno">
                                 <i class="bi  me-1"></i>
                                 👩🏽‍🎓 Alunos
                             </label>
                             <input type="radio" class="btn-check" name="status" id="professor" autocomplete="off">
-                            <label class="btn btn-style-rel" for="professor">
+                            <label class="me-2 btn btn-style-rel" for="professor">
                                 <i class="bi me-1"></i>
                                 👩🏽‍🏫 Professores
                             </label>
                             <input type="radio" class="btn-check" name="status" id="secretaria" autocomplete="off">
-                            <label class="btn btn-style-rel" for="secretaria">
+                            <label class="me-2 btn btn-style-rel" for="secretaria">
                                 <i class="bi me-1"></i>
                                 👩🏽‍💼 Secretaria
                             </label>
@@ -380,6 +392,52 @@
                             <label class="btn btn-style-rel" for="curso">
                                 <i class="bi me-1"></i>
                                 📚 Curso
+                            </label>
+                            <br>
+                            <br>
+                            <p>Escolha um tipo de periodo</p>
+                            <input type="radio" class="btn-check" name="periodo" id="semanal" autocomplete="off">
+                            <label class="me-3 btn btn-style-rel" for="semanal">
+                                <i class="bi  me-1"></i>
+                                🗓 Semanal
+                            </label>
+                            <input type="radio" class="btn-check" name="periodo" id="mensal" autocomplete="off">
+                            <label class="me-3 btn btn-style-rel" for="mensal">
+                                <i class="bi me-1"></i>
+                                🗓 Mensal
+                            </label>
+                            <input type="radio" class="btn-check" name="periodo" id="semestral" autocomplete="off">
+                            <label class="me-3 btn btn-style-rel" for="semestral">
+                                <i class="bi me-1"></i>
+                                🗓 Semestral
+                            </label>
+                            <input type="radio" class="btn-check" name="periodo" id="anual" autocomplete="off">
+                            <label class="btn btn-style-rel" for="anual">
+                                <i class="bi me-1"></i>
+                                🗓 Anual
+                            </label>
+                            <br>
+                            <br>
+                            <p>Escolha uma área de estudo</p>
+                            <input type="radio" class="btn-check" name="area" id="exatas" autocomplete="off">
+                            <label class="me-3 btn btn-style-rel" for="exatas">
+                                <i class="bi  me-1"></i>
+                                📐 Exatas
+                            </label>
+                            <input type="radio" class="btn-check" name="area" id="saude" autocomplete="off">
+                            <label class="me-3 btn btn-style-rel" for="saude">
+                                <i class="bi me-1"></i>
+                                🩺 Saúde
+                            </label>
+                            <input type="radio" class="btn-check" name="area" id="tech" autocomplete="off">
+                            <label class="me-3 btn btn-style-rel" for="tech">
+                                <i class="bi me-1"></i>
+                                💻 Tech
+                            </label>
+                            <input type="radio" class="btn-check" name="area" id="todas" autocomplete="off">
+                            <label class="btn btn-style-rel" for="todas">
+                                <i class="bi me-1"></i>
+                                📙 Todas
                             </label>
                         </div>
                     </div>
@@ -389,6 +447,12 @@
                             <p>Informações que vão constar no relatório</p>
                             <div id="resumo">
                             </div>
+                            <div id="periodo">
+                            </div>
+                            <div id="area">
+                            </div>
+                            <br>
+                            <button class="btn-gerar">Gerar Relatório</button>
                         </div>
                     </div>
                 </div>
@@ -444,11 +508,11 @@
                 const resumo = document.getElementById('resumo');
 
                 if (this.id === 'aluno') {
-                    resumo.innerHTML = ` <h5> Relatório - Alunos </h5>
+                    resumo.innerHTML = ` 
                     <table class="table table-sm table-bordered">
                                 <thead>
                                     <tr>
-                                        <th># Coluna/Campo</th>
+                                        <th>Coluna/Campo</th>
                                         <th>Tipo De Dado</th>
                                         <th>Descrição</th>
                                     </tr>
@@ -485,12 +549,14 @@
                     `;
                 }
 
+
+
                 if (this.id === 'professor') {
-                    resumo.innerHTML = ` <h5> Relatório - Professores </h5>
+                    resumo.innerHTML = ` 
                     <table class="table table-sm table-bordered">
                                 <thead>
                                     <tr>
-                                        <th># Coluna/Campo</th>
+                                        <th>Coluna/Campo</th>
                                         <th>Tipo De Dado</th>
                                         <th>Descrição</th>
                                     </tr>
@@ -520,11 +586,11 @@
                     `;
                 }
                 if (this.id === 'secretaria') {
-                    resumo.innerHTML = ` <h5> Relatório - Secretaria </h5>
+                    resumo.innerHTML = ` 
                     <table class="table table-sm table-bordered">
                                 <thead>
                                     <tr>
-                                        <th># Coluna/Campo</th>
+                                        <th>Coluna/Campo</th>
                                         <th>Tipo De Dado</th>
                                         <th>Descrição</th>
                                     </tr>
@@ -561,11 +627,11 @@
                     `;
                 }
                 if (this.id === 'curso') {
-                    resumo.innerHTML = ` <h5> Relatório - Professores </h5>
+                    resumo.innerHTML = ` 
                     <table class="table table-sm table-bordered">
                                 <thead>
                                     <tr>
-                                        <th># Coluna/Campo</th>
+                                        <th>Coluna/Campo</th>
                                         <th>Tipo De Dado</th>
                                         <th>Descrição</th>
                                     </tr>
@@ -611,6 +677,76 @@
 
             });
         });
+
+        document.querySelectorAll('input[name="area"]').forEach(el => {
+            el.addEventListener('change', function () {
+
+                const periodo = document.getElementById('area');
+
+                if (this.id === 'exatas') {
+                    area.innerHTML = `
+                    <h6> Cursos: Engenharias, Arquitetura e Agronomia  </h6> `;
+                }
+                if (this.id === 'saude') {
+                    area.innerHTML = `
+                    <h6> Cursos: Medicina, Farmacia e Odonto </h6> `;
+                }
+                if (this.id === 'tech') {
+                    area.innerHTML = `
+                    <h6> Cursos: Engenharia de Software e Analise e Desenvolvimento de Sistemas </h6> `;
+                }
+                if (this.id === 'todas') {
+                    area.innerHTML = `
+                    <h6> Cursos: Todos os cursos da Universidade </h6> `;
+                }
+            });
+        });
+
+        document.querySelectorAll('input[name="periodo"]').forEach(el => {
+            el.addEventListener('change', function () {
+
+                const periodo = document.getElementById('periodo');
+
+                if (this.id === 'semanal') {
+                    const dataAtual = new Date();
+                    const data = new Date();
+                    data.setDate(data.getDate() - 7);
+                    const fmt = (d) => d.toLocaleDateString('pt-BR');
+                    periodo.innerHTML = `
+                    <h6> Período semanal: ${fmt(data)} - ${fmt(dataAtual)} </h6> `;
+                }
+
+                if (this.id === 'mensal') {
+                    const dataAtual = new Date();
+                    const data = new Date();
+                    data.setMonth(data.getMonth() - 1);
+                    const fmt = (d) => d.toLocaleDateString('pt-BR');
+                    periodo.innerHTML = `
+                    <h6> Período mensal: ${fmt(data)} - ${fmt(dataAtual)} </h6> `;
+                }
+
+                if (this.id === 'semestral') {
+                    const dataAtual = new Date();
+                    const data = new Date();
+                    data.setMonth(data.getMonth() - 6);
+                    const fmt = (d) => d.toLocaleDateString('pt-BR');
+                    periodo.innerHTML = ` 
+                    <h6> Período semestral: ${fmt(data)} - ${fmt(dataAtual)} </h6> `;
+                }
+
+                if (this.id === 'anual') {
+                    const dataAtual = new Date();
+                    const data = new Date();
+                    data.setMonth(data.getMonth() - 12);
+                    const fmt = (d) => d.toLocaleDateString('pt-BR');
+                    periodo.innerHTML = ` 
+                    <h6> Período anual: ${fmt(data)} - ${fmt(dataAtual)} </h6> `;
+                }
+
+            });
+        });
+
+
 
         // Configuração padrão de tooltip 
         const tooltipDefaults = {

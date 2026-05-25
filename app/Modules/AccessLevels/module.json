@@ -1,0 +1,11 @@
+{
+    "name": "AccessLevels",
+    "alias": "accesslevels",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Modules\\AccessLevels\\Providers\\AccessLevelsServiceProvider"
+    ],
+    "files": []
+}

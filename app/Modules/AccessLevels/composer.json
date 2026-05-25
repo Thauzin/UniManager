@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/accesslevels",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Modules\\AccessLevels\\": "",
+            "App\\Modules\\AccessLevels\\Database\\Factories\\": "database/factories/",
+            "App\\Modules\\AccessLevels\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Modules\\AccessLevels\\Tests\\": "tests/"
+        }
+    }
+}

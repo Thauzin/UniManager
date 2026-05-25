@@ -1,92 +1,55 @@
-<aside class="app-sidebar bg-white shadow" data-bs-theme="">
-    <!--begin::Sidebar Brand-->
+<!-- Sidebar -->
+<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <div class="sidebar-brand">
-        <!--begin::Brand Image-->
-        <img src="{{ asset('src/assets/img/logo.avif') }}" alt="Logo" class="brand-image" height=""
-            width="" />
-        <!--end::Brand Image-->
-        <!--begin::Brand Text-->
-        <span class="brand-text fw-light d-none">Ministério Melhor Viver</span>
-        <!--end::Brand Text-->
+        <a href="solicitacao.html" class="brand-link">
+            <img src="../assets/img/AdminLTELogo.png" alt="UniManager" class="brand-image opacity-75 shadow" />
+            <span class="brand-text fw-light"></span>
+        </a>
     </div>
-    <!--end::Sidebar Brand-->
-    <!--begin::Sidebar Wrapper-->
-    <div class="sidebar-wrapper">
+
+    <div class="sidebar-wrapper bg-light">
         <nav class="mt-2">
-            <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
                 aria-label="Main navigation" data-accordion="false" id="navigation">
+                <hr>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-speedometer"></i>
-                        <p>
-                            Consulta de Estoque
-                            <i class="nav-arrow bi bi-chevron-right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="consulta_de_estoque.html" class="nav-link">
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>Polo 1</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="consulta_de_estoque.html" class="nav-link">
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>Polo 2</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="consulta_de_estoque.html" class="nav-link">
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>Polo 3</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="histórico_de_Movimentações.html" class="nav-link">
-                        <i class="nav-icon bi bi-clock-history"></i>
-                        <p>Histórico de Movimentações</p>
+                    <a href="../Aluno/dashboard_aluno.html" class="nav-link">
+                        <i class="nav-icon bi bi-person text-dark"></i>
+                        <p class="text-dark">Aluno</p>
                     </a>
                 </li>
-
+                <hr>
                 <li class="nav-item">
-                    <a href="listagem_tipo_de_produto.html" class="nav-link">
-                        <i class="nav-icon bi bi-box-seam"></i>
-                        <p>Tipo de Produto</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('centers.index') }}" class="nav-link">
-                        <i class="nav-icon bi bi-building"></i>
-                        <p>Polos</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('users.index') }}" class="nav-link active">
-                        <i class="nav-icon bi bi-people"></i>
-                        <p>Usuários</p>
+                    <a href="../Aluno/dashboard_aluno.html" class="nav-link">
+                        <i class="nav-icon bi bi-bar-chart text-dark"></i>
+                        <p class="text-dark">Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="javascript:void(0)" class="nav-link text-danger"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <p>Sair</p>
+                    <a href="../Aluno/verDetalhesMaterias.html" class="nav-link">
+                        <i class="nav-icon bi bi-book text-dark"></i>
+                        <p class="text-dark">Matérias</p>
                     </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                </li>
+                <li class="nav-item">
+                    <a href="../Aluno/atividadeAluno.html" class="nav-link">
+                        <i class="nav-icon bi bi-clipboard-check text-dark"></i>
+                        <p class="text-dark">Atividades</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Aluno/solicitacao.html" class="nav-link">
+                        <i class="nav-icon bi bi-file-earmark-text text-dark"></i>
+                        <p class="text-dark">Solicitações</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Aluno/configuracoes.html" class="nav-link">
+                        <i class="nav-icon bi bi-gear text-dark"></i>
+                        <p class="text-dark">Configurações</p>
+                    </a>
                 </li>
             </ul>
-            <!--end::Sidebar Menu-->
         </nav>
     </div>
-    <!--end::Sidebar Wrapper-->
 </aside>
-<!--end::Sidebar-->

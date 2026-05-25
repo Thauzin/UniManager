@@ -9,10 +9,13 @@ class LoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      */
+
+    protected $stopOnFirstFailure = true;
+
     public function rules(): array
     {
         return [
-            'username' => ['required'],
+            'email' => ['required'],
             'password' => ['required'],
         ];
     }
@@ -20,7 +23,7 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'username.required' => 'O usuário é obrigatório.',
+            'email.required' => 'O E-mail é obrigatório.',
             'password.required' => 'A senha é obrigatória.',
         ];
     }

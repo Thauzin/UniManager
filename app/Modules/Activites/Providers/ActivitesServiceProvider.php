@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Modules\Notifications\Providers;
+namespace App\Modules\Activites\Providers;
 
 use Nwidart\Modules\Support\ModuleServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
 
-class NotificationsServiceProvider extends ModuleServiceProvider
+class ActivitesServiceProvider extends ModuleServiceProvider
 {
     /**
      * The name of the module.
      */
-    protected string $name = 'Notifications';
+    protected string $name = 'Activites';
 
     /**
      * The lowercase version of the module name.
      */
-    protected string $nameLower = 'notifications';
+    protected string $nameLower = 'activites';
 
     /**
      * Command classes to register.

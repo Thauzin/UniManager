@@ -10,77 +10,152 @@ return new class extends Migration
     {
         /*
         |--------------------------------------------------------------------------
-        | ACCESS LEVELS
+        | COURSE AREAS
         |--------------------------------------------------------------------------
         */
 
-        Schema::create('access_levels', function (Blueprint $table) {
+        Schema::create('course_areas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->softDeletes();
+            $table->string('name')->unique();
             $table->timestamps();
         });
 
         /*
         |--------------------------------------------------------------------------
-        | USERS
+        | COURSE PERIODS
         |--------------------------------------------------------------------------
         */
 
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('course_periods', function (Blueprint $table) {
             $table->id();
-
             $table->string('name');
-
-            $table->string('username')
-                ->unique();
-
-            $table->string('password');
-
-            $table->string('authenticable_type')
-                ->nullable();
-
-            $table->unsignedBigInteger('authenticable_id')
-                ->nullable();
-
-            $table->foreignId('access_level_id')
-                ->nullable()
-                ->constrained('access_levels');
-
-            $table->foreignId('center_id')
-                ->nullable()
-                ->constrained('centers');
-
-            $table->softDeletes();
             $table->timestamps();
         });
 
         /*
         |--------------------------------------------------------------------------
-        | NOTIFICATIONS
+        | COURSES
         |--------------------------------------------------------------------------
         */
 
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('courses', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('product_type_id')
-                ->nullable()
-                ->constrained('product_types')
-                ->nullOnDelete();
+            $table->string('name')->unique();
+            $table->text('description');
+            $table->integer('workload')->nullable();
 
-            $table->foreignId('center_id')
-                ->nullable()
-                ->constrained('centers')
-                ->nullOnDelete();
+            $table->foreignId('course_area_id')
+                ->constrained('course_areas');
+
+            $table->timestamps();
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | STUDENTS
+        |--------------------------------------------------------------------------
+        */
+
+        Schema::create('students', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('ra')->unique();
+
+            $table->foreignId('user_id')
+                ->constrained('users');
+
+            $table->foreignId('course_id')
+                ->constrained('courses');
+
+            $table->dateTime('course_start');
+            $table->dateTime('course_end');
+
+            $table->timestamps();
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | SUBJECTS
+        |--------------------------------------------------------------------------
+        */
+
+        Schema::create('subjects', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('name');
+
+            $table->timestamp('start_date');
+            $table->timestamp('end_date');
+
+            $table->integer('workload');
+
+            $table->foreignId('user_id')
+                ->constrained('users');
+
+            $table->foreignId('course_period_id')
+                ->constrained('course_periods');
+
+            $table->timestamps();
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | COURSE SUBJECT
+        |--------------------------------------------------------------------------
+        */
+
+        Schema::create('course_subject', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('course_id')
+                ->constrained('courses');
+
+            $table->foreignId('subject_id')
+                ->constrained('subjects');
+
+            $table->timestamps();
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | CLASSES
+        |--------------------------------------------------------------------------
+        */
+
+        Schema::create('classes', function (Blueprint $table) {
+            $table->id();
+
+            $table->date('date');
+
+            $table->string('name');
 
             $table->text('description');
 
-            $table->integer('current_quantity')
-                ->default(0);
+            $table->foreignId('subject_id')
+                ->constrained('subjects');
 
-            $table->timestamp('viewed_at')
-                ->nullable();
+            $table->timestamps();
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | FREQUENCIES
+        |--------------------------------------------------------------------------
+        */
+
+        Schema::create('frequencies', function (Blueprint $table) {
+            $table->id();
+
+            $table->double('percentage');
+
+            $table->foreignId('class_id')
+                ->constrained('classes');
+
+            $table->foreignId('student_id')
+                ->constrained('students');
+
+            $table->string('status')->nullable();
 
             $table->timestamps();
         });
@@ -88,8 +163,13 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('notifications');
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('access_levels');
+        Schema::dropIfExists('frequencies');
+        Schema::dropIfExists('classes');
+        Schema::dropIfExists('course_subject');
+        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('students');
+        Schema::dropIfExists('courses');
+        Schema::dropIfExists('course_periods');
+        Schema::dropIfExists('course_areas');
     }
 };

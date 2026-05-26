@@ -1,40 +1,26 @@
 <?php
-namespace App\Modules\Notifications\Http\Controllers;
+
+namespace App\Modules\Activites\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Models\Notifications;
-use App\Modules\Notifications\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class NotificationsController extends Controller
+use App\Modules\Models\Activites;
+
+class ActivitesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
-    public function readAll()
-    {
-        Notification::whereNull('viewed_at')->update(['viewed_at' => now()]);
-
-        return back();
-    }
-
-    public function read(Notification $notification)
-    {
-        $notification->update(['viewed_at' => now(),]);
-
-        return back();
-    }
-
     public function index()
     {
         try {
 
-            $items = Notifications::latest()->paginate(10);
+            //$items = Activites::latest()->paginate(10);
 
-            return view('notifications::index', compact('items'));
+            return view('activites::index');
 
         } catch (\Throwable $e) {
 
@@ -54,7 +40,7 @@ class NotificationsController extends Controller
     {
         try {
 
-            return view('notifications::create');
+            return view('activites::create');
 
         } catch (\Throwable $e) {
 
@@ -78,12 +64,12 @@ class NotificationsController extends Controller
 
             $data = $request->all();
 
-            $item = Notifications::create($data);
+            $item = Activites::create($data);
 
             DB::commit();
 
             return redirect()
-                ->route('notifications.index')
+                ->route('activites.index')
                 ->with(
                     'success',
                     'Registro criado com sucesso.'
@@ -111,9 +97,9 @@ class NotificationsController extends Controller
     {
         try {
 
-            $item = Notifications::findOrFail($id);
+            $item = Activites::findOrFail($id);
 
-            return view('notifications::show', compact('item'));
+            return view('activites::show', compact('item'));
 
         } catch (\Throwable $e) {
 
@@ -133,9 +119,9 @@ class NotificationsController extends Controller
     {
         try {
 
-            $item = Notifications::findOrFail($id);
+            $item = Activites::findOrFail($id);
 
-            return view('notifications::edit', compact('item'));
+            return view('activites::edit', compact('item'));
 
         } catch (\Throwable $e) {
 
@@ -157,7 +143,7 @@ class NotificationsController extends Controller
 
         try {
 
-            $item = Notifications::findOrFail($id);
+            $item = Activites::findOrFail($id);
 
             $data = $request->all();
 
@@ -166,7 +152,7 @@ class NotificationsController extends Controller
             DB::commit();
 
             return redirect()
-                ->route('notifications.index')
+                ->route('activites.index')
                 ->with(
                     'success',
                     'Registro atualizado com sucesso.'
@@ -196,14 +182,14 @@ class NotificationsController extends Controller
 
         try {
 
-            $item = Notifications::findOrFail($id);
+            $item = Activites::findOrFail($id);
 
             $item->delete();
 
             DB::commit();
 
             return redirect()
-                ->route('notifications.index')
+                ->route('activites.index')
                 ->with(
                     'success',
                     'Registro removido com sucesso.'

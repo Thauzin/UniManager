@@ -47,8 +47,4 @@ class User extends Authenticatable
         return $this->belongsTo(AccessLevel::class);
     }
 
-    public function center()
-    {
-        return $this->belongsTo(Center::class);
-    }
 }

@@ -1,0 +1,11 @@
+{
+    "name": "Activites",
+    "alias": "activites",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Modules\\Activites\\Providers\\ActivitesServiceProvider"
+    ],
+    "files": []
+}

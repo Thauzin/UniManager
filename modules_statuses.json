@@ -3,5 +3,6 @@
     "AccessLevels": true,
     "Centers": true,
     "ProductProviders": true,
-    "ProductCategories": true
+    "ProductCategories": true,
+    "Activites": true
 }

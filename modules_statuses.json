@@ -4,5 +4,6 @@
     "Centers": true,
     "ProductProviders": true,
     "ProductCategories": true,
-    "Activites": true
+    "Activites": true,
+    "Courses": true
 }

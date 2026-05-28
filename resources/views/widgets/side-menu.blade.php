@@ -13,7 +13,7 @@
                 aria-label="Main navigation" data-accordion="false" id="navigation">
                 <hr>
                 <li class="nav-item">
-                    <a href="../Aluno/dashboard_aluno.html" class="nav-link">
+                    <a href="{{ route('courses.index') }}" class="nav-link">
                         <i class="nav-icon bi bi-person text-dark"></i>
                         <p class="text-dark">Aluno</p>
                     </a>

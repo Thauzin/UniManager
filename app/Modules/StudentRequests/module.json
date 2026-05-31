@@ -1,0 +1,11 @@
+{
+    "name": "StudentRequests",
+    "alias": "studentrequests",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Modules\\StudentRequests\\Providers\\StudentRequestsServiceProvider"
+    ],
+    "files": []
+}

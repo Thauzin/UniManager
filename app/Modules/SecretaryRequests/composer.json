@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/secretaryrequests",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Modules\\SecretaryRequests\\": "",
+            "App\\Modules\\SecretaryRequests\\Database\\Factories\\": "database/factories/",
+            "App\\Modules\\SecretaryRequests\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Modules\\SecretaryRequests\\Tests\\": "tests/"
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "SecretaryRequests",
+    "alias": "secretaryrequests",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Modules\\SecretaryRequests\\Providers\\SecretaryRequestsServiceProvider"
+    ],
+    "files": []
+}

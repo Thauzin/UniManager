@@ -129,7 +129,7 @@
                                     @elseif($item->status == 'Em Análise')
                                         <td><span class="badge text-bg-warning badge-md">{{ $item->status }}</span></td>
                                     @elseif($item->status == 'Concluído')
-                                        <td><span class="badge text-bg-lightgreen badge-md">{{ $item->status }}</span></td>
+                                        <td><span class="badge text-bg-info badge-md">{{ $item->status }}</span></td>
                                     @endif
                                     <td>
                                         <a href="{{ route('secretaryrequests.edit', $item->id) }}">

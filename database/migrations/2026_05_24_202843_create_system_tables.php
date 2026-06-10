@@ -90,8 +90,11 @@ return new class extends Migration
 
             $table->integer('workload');
 
-            $table->foreignId('user_id')
-                ->constrained('users');
+            $table->integer('user_id');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
 
             $table->foreignId('course_period_id')
                 ->constrained('course_periods');

@@ -22,7 +22,7 @@ class LoginController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->route('users.index');
+            return redirect()->route('courses.index');
         }
 
         return back()->withInput()->with('error', 'E-mail ou senha inválidos.');

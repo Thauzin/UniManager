@@ -57,13 +57,13 @@
     @yield('content')
 
     <!-- Toast Container -->
-    {{-- <div id="toast-container"></div>
+    <div id="toast-container"></div>
 
     <!-- Loader Overlay -->
     <div id="loader-overlay">
         <div class="loader-spinner"></div>
         <span class="loader-text">Aguarde...</span>
-    </div> --}}
+    </div>
 
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
     <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"

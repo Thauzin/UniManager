@@ -108,7 +108,7 @@ class SecretaryRequestsController extends Controller
 
             $item = StudentRequest::findOrFail($id);
 
-            return view('secretaryrequests::show', compact('StudentRequests'));
+            return view('secretaryrequests::show', compact('item'));
 
         } catch (\Throwable $e) {
 
@@ -156,7 +156,9 @@ class SecretaryRequestsController extends Controller
 
             $data = $request->all();
 
-            $item->update($data);
+            $item->update([
+                'status' => $request->status 
+            ]);
 
             DB::commit();
 

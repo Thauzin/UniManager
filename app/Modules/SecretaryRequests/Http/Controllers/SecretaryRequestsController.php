@@ -157,7 +157,8 @@ class SecretaryRequestsController extends Controller
             $data = $request->all();
 
             $item->update([
-                'status' => $request->status 
+                'status' => $request->status,
+                'answer' => $request->answer
             ]);
 
             DB::commit();

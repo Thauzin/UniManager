@@ -62,7 +62,7 @@
                                         <div class="mb-3 w-100">
                                             <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label">Responder</label>
-                                                <input type="text" name="description" class="form-control">
+                                                <input type="text" name="answer" class="form-control">
                                             </div>
                                         </div>
                                     </div>

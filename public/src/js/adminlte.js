@@ -5,9 +5,10 @@
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-    typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.adminlte = {}));
-})(this, (function (exports) { 'use strict';
+        typeof define === 'function' && define.amd ? define(['exports'], factory) :
+            (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.adminlte = {}));
+})(this, (function (exports) {
+    'use strict';
 
     const domContentLoadedCallbacks = [];
     const onDOMContentLoaded = (callback) => {
@@ -1090,5 +1091,27 @@ function toggleSenha() {
         input.type = "password";
         icon.classList.replace("bi-eye-slash", "bi-eye");
     }
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────
+function showToast(msg, tipo) {
+    const container = document.getElementById('toast-container');
+    const t = document.createElement('div');
+    const icon = tipo === 'verde' ? 'bi-check-circle-fill'
+        : tipo === 'vermelho' ? 'bi-x-circle-fill'
+            : 'bi-exclamation-circle-fill';
+    t.className = 'toast-brand toast-' + tipo;
+    t.innerHTML = '<i class="bi ' + icon + '"></i><span>' + msg + '</span>';
+    container.appendChild(t);
+    requestAnimationFrame(() => { requestAnimationFrame(() => { t.classList.add('show'); }); });
+    setTimeout(() => {
+        t.classList.remove('show');
+        setTimeout(() => t.remove(), 350);
+    }, 3500);
+}
+
+function showLoader(show) {
+    const el = document.getElementById('loader-overlay');
+    if (show) el.classList.add('active'); else el.classList.remove('active');
 }
 //# sourceMappingURL=adminlte.js.map

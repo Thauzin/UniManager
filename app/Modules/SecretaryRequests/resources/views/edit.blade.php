@@ -11,6 +11,24 @@
 @endpush
 
 @section('content')
+    <style>
+        .text-lightgreen {
+            color: #20c963;
+        }
+
+        .bg-lightgreen {
+            color: black;
+            background: #20c963;
+        }
+
+        .btn-lightgreen {
+            background: #20c963;
+        }
+
+        .btn-lightgreen:hover {
+            background: #19e76b;
+        }
+    </style>
     <main class="app-main">
         <!--begin::App Content Header-->
         <div class="app-content-header">
@@ -22,36 +40,37 @@
                         <div class="col-md-12">
                             <div class="card w-100">
                                 <div class="card-header w-100">
-                                    <div class="card-title">Nova Solicitação</div> <br>
-                                    <small class="text-muted">Preencha os dados para solicitar um
-                                serviço</small>
+                                    <strong>
+                                        <div class="card-title">Solicitação de {{ $item->student }}</div>
+                                    </strong> <br>
+                                    <small class="text-muted">{{ $item->description }}</small>
                                 </div>
 
                                 <!--end::Header-->
                                 <!--begin::Form-->
 
-                                
 
-                               
-                                    
-                                
-                                <form action="{{ route('secretaryrequests.edit', $item->id) }}" method="POST">
+
+
+
+
+                                <form action="{{ route('secretaryrequests.update', $item->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <!--begin::Body-->
                                     <div class="card-body">
                                         <div class="mb-3 w-100">
                                             <div class="mb-3">
-                                                <label for="exampleInputPassword1" class="form-label">{{ $item -> status }}</label>
-                                                <input type="text" name="description" class="form-control"
-                                                >
+                                                <label for="exampleInputPassword1" class="form-label">Responder</label>
+                                                <input type="text" name="answer" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                     <!--end::Body-->
                                     <!--begin::Footer-->
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-dark">Enviar Solicitação</button>
+                                    <div class="card-footer d-flex justify-content-end gap-2">
+                                        <button type="submit" name="status" value="Em Análise" class="btn btn-warning">Em analise</button>
+                                        <button type="submit" name="status" value="Concluído" class="btn btn-lightgreen">Concluído</button>
                                     </div>
                                     <!--end::Footer-->
                                 </form>

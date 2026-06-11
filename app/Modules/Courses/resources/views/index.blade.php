@@ -1,368 +1,256 @@
 @extends('layouts.sistema')
 
-@section('title')
-    Login | Ministério Melhor Viver
-@endsection
-@section('meta_title')
-    Login | Ministério Melhor Viver
-@endsection
-
-@push('head')
-@endpush
+@section('title', 'Gerenciar Cursos')
 
 @section('content')
     <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-            <!--begin::Container-->
+        <div class="app-content">
             <div class="container-fluid">
-                <!--begin::Row-->
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h3 class="mb-0">Gerenciar Disciplinas</h3>
-                        <p>Administre turmas, professores e alunos</p>
-                    </div>
-                    <div class="col-sm-12">
-                        <ol class="breadcrumb float-sm-end">
-                            <div class="col-sm-6 d-flex justify-content-end align-items-center gap-2">
-                                <a href="{{ route('courses.create') }}" class="btn btn-primary">
-                                    <i class="bi bi-plus-lg"></i>
-                                    <span>Novo</span>
-                                </a>
-                            </div>
-                            <div class="collapse mt-3 w-100" id="novaTurma">
-                                <div class="card card-body w-100">
-                                    <div class="card card-dark card-outline mb-4">
-                                        <!--begin::Header-->
-                                        <div class="col-md-12">
-                                            <div class="card w-100">
-                                                <div class="card-header w-100">
-                                                    <div class="card-title">Nova Disciplina</div> <br>
-                                                    <small class="text-muted">Preencha os dados para criar uma nova
-                                                        disciplina</small>
-                                                </div>
 
-                                                <!--end::Header-->
-                                                <!--begin::Form-->
-                                                <form>
-                                                    <!--begin::Body-->
-                                                    <div class="card-body">
-                                                        <div class="mb-3 w-100">
-                                                            <div class="mb-3">
-                                                                <label for="exampleInputPassword1" class="form-label">Nome
-                                                                    da Turma</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="exampleInputPassword1" />
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="exampleInputPassword1"
-                                                                    class="form-label">Curso</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="exampleInputPassword1" />
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="exampleInputPassword1"
-                                                                    class="form-label">Disciplina</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="exampleInputPassword1" />
-                                                            </div>
-                                                            <label for="validationCustom04" class="form-label">Professor
-                                                                Responsavel</label>
-                                                            <select class="form-select" id="validationCustom04">
-                                                                <option selected disabled value="">Escolha uma opção
-                                                                </option>
-                                                                <option>Prof. Maria Santos</option>
-                                                                <option>Prof. João Oliveira</option>
-                                                                <option>Prof. Ana Paula</option>
-                                                                <option>Prof. Roberto Lima</option>
-                                                            </select>
-                                                            <div class="invalid-feedback">Por favor selecione uma
-                                                                opção</div>
-                                                        </div>
-                                                    </div>
-                                                    <!--end::Body-->
-                                                    <!--begin::Footer-->
-                                                    <div class="card-footer">
-                                                        <button type="submit" class="btn btn-dark">Criar
-                                                            Disciplina</button>
-                                                    </div>
-                                                    <!--end::Footer-->
-                                                </form>
-                                                <!--end::Form-->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </ol>
+                {{-- Cabeçalho --}}
+                <div class="d-flex justify-content-between align-items-start mb-4">
+                    <div>
+                        <h1 class="fw-medium mb-1">Gerenciar Cursos</h1>
+                        <p class="text-muted mb-0">Administre os cursos cadastrados no sistema</p>
                     </div>
-                    <!--end::Row-->
+
+                    <a href="{{ route('courses.create') }}" class="btn btn-dark px-4 d-flex align-items-center gap-2">
+                        <i class="bi bi-plus-lg"></i>
+                        Novo Curso
+                    </a>
                 </div>
-                <!--end::Container-->
-            </div>
-            <br>
-            <div class="app-content">
-                <!--begin::Container-->
-                <div class="container-fluid">
-                    <div class="app-content">
-                        <div class="container-fluid">
 
-                            <!-- Info Boxes -->
-                            <div class="row g-4">
-                                <!-- Disciplinas Cursando -->
-                                <div class="col-12 col-sm-6 col-md-3">
-                                    <div class="dashboard-card border">
-                                        <div class="card-content">
-                                            <span class="card-title">Total de Turmas</span>
-                                            <span class="card-number">6</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Atividades Pendentes -->
-                                <div class="col-12 col-sm-6 col-md-3">
-                                    <div class="dashboard-card border">
-                                        <div class="card-content">
-                                            <span class="card-title">Total de Alunos</span>
-                                            <span class="card-number text-primary">120</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Frequência Geral -->
-                                <div class="col-12 col-sm-6 col-md-3">
-                                    <div class="dashboard-card border">
-                                        <div class="card-content">
-                                            <span class="card-title">Média Por Turma</span>
-                                            <span class="card-number text-sucess">30</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Média Geral -->
-                                <div class="col-12 col-sm-6 col-md-3">
-                                    <div class="dashboard-card border">
-                                        <div class="card-content">
-                                            <span class="card-title">Total de Professores</span>
-                                            <span class="card-number text-primary">15</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                {{-- Cards de resumo --}}
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="summary-card">
+                            <div class="summary-label">Total de Cursos</div>
+                            <div class="summary-value">{{ $courses->total() }}</div>
                         </div>
-                        <!-- /.row -->
                     </div>
-                    <!--end::Container-->
+                    <div class="col-md-4">
+                        <div class="summary-card">
+                            <div class="summary-label">Nesta Página</div>
+                            <div class="summary-value text-primary">{{ $courses->count() }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="summary-card">
+                            <div class="summary-label">Páginas</div>
+                            <div class="summary-value text-success">{{ $courses->lastPage() }}</div>
+                        </div>
+                    </div>
                 </div>
-                <br>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h3 class="card-title text-dark fw-bold">Lista de Disciplinas</h3>
+
+                {{-- Alertas --}}
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4" role="alert">
+                        <i class="bi bi-check-circle me-2"></i>{{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body p-0 table-responsive">
-                        <table class="table table-sm table-bordered">
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show rounded-3 mb-4" role="alert">
+                        <i class="bi bi-exclamation-circle me-2"></i>{{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif
+
+                {{-- Tabela --}}
+                <div class="content-card">
+
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <span class="fw-medium" style="font-size:15px;">Lista de Cursos</span>
+
+                        <div class="search-wrapper">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" class="search-input" placeholder="Buscar por nome..." id="searchCourse">
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0">
                             <thead>
                                 <tr>
-                                    <th style="width: 10px"></th>
-                                    <th>Turmas</th>
-                                    <th>Curso</th>
-                                    <th>Disciplina</th>
-                                    <th>Professor</th>
-                                    <th>Alunos</th>
-                                    <th>Ações</th>
+                                    <th>#</th>
+                                    <th>Nome do Curso</th>
+                                    <th>Criado em</th>
+                                    <th class="text-end">Ações</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($courses as $course)
-                                    <tr class="align-middle">
-                                        <td></td>
-                                        <td>ESFOT7S</td>
-                                        <td>Engenharia de Software</td>
-                                        <td>{{ $course->name }}</td>
-                                        <td>Prof. Maria Santos</td>
-                                        <td><span class="badge text-bg-primary bi-people-fill"> 36</span></td>
-                                        <td>
-                                            <button title="Adicionar Alunos" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#modalAlunos"
-                                                class="me-2 btn btn-outline-dark mb-2 btn-sm bi-people-fill"></button>
-                                            <button title="Editar Turma" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#modalEditar"
-                                                class="me-2 btn btn-outline-dark mb-2 btn-sm bi-pencil-square"></button>
-                                            <button title="Excluir Turma" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#modalRemover"
-                                                class="btn btn-outline-danger mb-2 btn-sm bi-trash"></button>
+
+                            <tbody id="tbodyCourses">
+                                @forelse ($courses as $course)
+                                    <tr>
+                                        <td class="text-muted" style="font-size:13px;">
+                                            {{ $course->id }}
+                                        </td>
+
+                                        <td class="fw-medium">{{ $course->name }}</td>
+
+                                        <td class="text-muted" style="font-size:13px;">
+                                            {{ $course->created_at->format('d/m/Y') }}
+                                        </td>
+
+                                        <td class="text-end">
+                                            <div class="d-inline-flex gap-2">
+                                                <a href="{{ route('courses.edit', $course->id) }}"
+                                                   class="action-btn" title="Editar">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+
+                                                <button class="action-btn action-btn-danger"
+                                                        onclick="openDeleteModal({{ $course->id }})"
+                                                        title="Excluir">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
-                                @endforeach
-                                <!-- MODAL -->
-                                <div class="modal fade" id="modalEditar" tabindex="-1">
-                                    <div class="modal-dialog modal-md">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Editar Disciplina</h5><br>
-                                                <button title="." type="button" class="btn-close" data-bs-dismiss="modal">
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <label for="exampleInputPassword1" class="form-label">Turma</label>
-                                                <input type="text" class="form-control" id="exampleInputPassword1" />
-                                            </div>
-                                            <div class="modal-body">
-                                                <label for="exampleInputPassword1" class="form-label">Curso</label>
-                                                <input type="text" class="form-control" id="exampleInputPassword1" />
-                                            </div>
-                                            <div class="modal-body">
-                                                <label for="exampleInputPassword1" class="form-label">Disciplina</label>
-                                                <input type="text" class="form-control" id="exampleInputPassword1" />
-                                            </div>
-                                            <div class="modal-body">
-                                                <label for="exampleInputPassword1" class="form-label">Professor
-                                                    Responsavel</label>
-                                                <select class="form-select">
-                                                    <option>Selecione um professor</option>
-                                                    <option>João Silva</option>
-                                                    <option>Maria Santos</option>
-                                                </select>
-                                                <br>
-                                                <button class="btn btn-dark">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                    Adicionar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted py-5">
+                                            <i class="bi bi-inbox fs-3 d-block mb-2"></i>
+                                            Nenhum curso cadastrado ainda.
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
+
+                    {{-- Paginação --}}
+                    @if ($courses->hasPages())
+                        <div class="mt-4 d-flex justify-content-end">
+                            {{ $courses->links() }}
+                        </div>
+                    @endif
+
                 </div>
-                <!-- /.card -->
+
             </div>
-            <div class="modal fade" id="modalAlunos" tabindex="-1">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Gerenciar Alunos</h5><br>
-                            <button title="." type="button" class="btn-close" data-bs-dismiss="modal">
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <label class="form-label">
-                                Adicionar Aluno
-                            </label>
-                            <div class="d-flex gap-2">
-                                <select class="form-select">
-                                    <option>Selecione um aluno</option>
-                                    <option>João Silva</option>
-                                    <option>Maria Santos</option>
-                                </select>
-                                <button class="btn btn-dark">
-                                    <i class="bi bi-person-plus"></i>
-                                    Adicionar
-                                </button>
-                            </div>
-                            <hr>
-                            <h6>Alunos na Turma</h6>
-                            <div class="border rounded p-3 mb-2 d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>João Silva</strong><br>
-                                    <small>Matrícula: 2021001</small>
-                                </div>
-                            </div>
-                            <div class="border rounded p-3 mb-2 d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>Maria Santos</strong><br>
-                                    <small>Matrícula: 2021002</small>
-                                </div>
-                            </div>
-                            <div class="border rounded p-3 mb-2 d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>Pedro Oliveira</strong><br>
-                                    <small>Matrícula: 2023001</small>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="modalRemover" tabindex="-1">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Remover Aluno</h5><br>
-                            <button title="." type="button" class="btn-close" data-bs-dismiss="modal">
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <label class="form-label">
-                                Remover Aluno
-                            </label>
-                            <div class="border rounded p-3 mb-2 d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>João Silva</strong><br>
-                                    <small>Matrícula: 2021001</small>
-                                </div>
-                                <button class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-person-dash"></i>
-                                </button>
-                            </div>
-                            <div class="border rounded p-3 mb-2 d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>Maria Santos</strong><br>
-                                    <small>Matrícula: 2021002</small>
-                                </div>
-                                <button class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-person-dash"></i>
-                                </button>
-                            </div>
-                            <div class="border rounded p-3 mb-2 d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>Pedro Oliveira</strong><br>
-                                    <small>Matrícula: 2023001</small>
-                                </div>
-                                <button class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-person-dash"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!--end::App Content Header-->
-            <!--begin::App Content-->
-            <!-- /.card -->
-
-            <!--begin::JavaScript-->
-            <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (() => {
-                    'use strict';
-
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    const forms = document.querySelectorAll('.needs-validation');
-
-                    // Loop over them and prevent submission
-                    Array.from(forms).forEach((form) => {
-                        form.addEventListener(
-                            'submit',
-                            (event) => {
-                                if (!form.checkValidity()) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-
-                                form.classList.add('was-validated');
-                            },
-                            false,
-                        );
-                    });
-                })();
-            </script>
-            <!--end::JavaScript-->
         </div>
-        <!--end::Form Validation-->
-        <!--end::App Content-->
+
+        {{-- Modal: Confirmar exclusão --}}
+        <div class="modal fade" id="deleteModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title fw-medium">Confirmar exclusão</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body text-muted">
+                        Tem certeza que deseja excluir este curso? Esta ação não pode ser desfeita.
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                        <form id="deleteForm" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Sim, excluir</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
+
+    <script>
+        function openDeleteModal(id) {
+            document.getElementById('deleteForm').action = `/courses/${id}`;
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('deleteModal')).show();
+        }
+
+        const searchCourse = document.getElementById('searchCourse');
+        if (searchCourse) {
+            searchCourse.addEventListener('keyup', function () {
+                const value = this.value.toLowerCase();
+                document.querySelectorAll('#tbodyCourses tr').forEach(row => {
+                    row.style.display = row.innerText.toLowerCase().includes(value) ? '' : 'none';
+                });
+            });
+        }
+    </script>
+
+    <style>
+        .summary-card {
+            background: #fff;
+            border: 0.5px solid rgba(0,0,0,.08);
+            border-radius: 14px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .summary-label {
+            font-size: 13px;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+        .summary-value {
+            font-size: 28px;
+            font-weight: 500;
+            color: #0d0d0d;
+        }
+        .content-card {
+            background: #fff;
+            border: 0.5px solid rgba(0,0,0,.08);
+            border-radius: 14px;
+            padding: 1.25rem;
+        }
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f5f5f7;
+            border-radius: 10px;
+            padding: 9px 14px;
+            width: 280px;
+        }
+        .search-icon { color: #6c757d; font-size: 15px; }
+        .search-input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+            color: #0d0d0d;
+        }
+        .search-input::placeholder { color: #adb5bd; }
+        .table thead th {
+            font-weight: 500;
+            font-size: 13px;
+            color: #6c757d;
+            border-bottom: 0.5px solid #e9ecef;
+            padding-bottom: 12px;
+        }
+        .table tbody td {
+            padding-top: 14px;
+            padding-bottom: 14px;
+            border-bottom: 0.5px solid #f1f3f5;
+            font-size: 14px;
+        }
+        .table tbody tr:last-child td { border-bottom: none; }
+        .action-btn {
+            background: #f5f5f7;
+            border: 0.5px solid #e9ecef;
+            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #6c757d;
+            text-decoration: none;
+            transition: background .15s;
+        }
+        .action-btn:hover { background: #e9ecef; color: #495057; }
+        .action-btn-danger { color: #e24b4a; }
+        .action-btn-danger:hover { background: #fce8e8; color: #e24b4a; }
+        .modal-content { border-radius: 18px; }
+        .fw-medium { font-weight: 500; }
+        .text-primary { color: #1a6fd4 !important; }
+        .text-success { color: #1d9e75 !important; }
+    </style>
 @endsection

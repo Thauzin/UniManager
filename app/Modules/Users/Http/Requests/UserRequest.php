@@ -20,9 +20,10 @@ class UserRequest extends FormRequest
             'access_level_id'    => 'required|numeric',
             'username'           => ['required', 'regex:/^[a-z0-9]*$/', 'max:100', Rule::unique('users', 'username')->ignore($this->user)->whereNull('deleted_at')],
             'password'           => [$this->isMethod('post') ? 'required' : 'nullable', 'confirmed', 'max:30', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
-            'center_id'          => 'required_if:access_level_id,2',
             'authenticable_type' => 'nullable|string',
             'authenticable_id'   => 'nullable|integer',
+            'email'              => ['required', 'email', 'max:255', Rule::unique('users', 'email') ->ignore($this->user) ->whereNull('deleted_at'),
+            ],
         ];
     }
 
@@ -44,7 +45,6 @@ class UserRequest extends FormRequest
             'password.symbols'         => 'A senha deve conter símbolos.',
             'password.uncompromised'   => 'Esta senha foi encontrada em vazamentos de dados e não é segura.',
             'access_level_id.required' => 'O campo Nível de Acesso é obrigatório.',
-            'center_id.required_if'    => 'O campo Polo é obrigatório para o nível de acesso voluntário.',
         ];
     }
 

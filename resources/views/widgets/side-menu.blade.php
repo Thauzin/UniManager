@@ -7,6 +7,7 @@
         </a>
     </div>
 
+    @access(1)
     <div class="sidebar-wrapper bg-light">
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
@@ -52,4 +53,5 @@
             </ul>
         </nav>
     </div>
+    @endaccess
 </aside>

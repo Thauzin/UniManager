@@ -71,24 +71,6 @@
                                                 @endforeach
                                             </select>
                                         </div>
-
-                                        <div class="col-md-6">
-                                            <label class="form-label fw-semibold">
-                                                Polo
-                                                <span class="text-danger d-none" id="center-required">*</span>
-                                            </label>
-
-                                            <select name="center_id" class="form-select">
-                                                <option value="">Selecione...</option>
-
-                                                @foreach ($centers as $center)
-                                                    <option value="{{ $center->id }}"
-                                                        {{ old('center_id', $user->center_id ?? '') == $center->id ? 'selected' : '' }}>
-                                                        {{ $center->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
                                     </div>
 
                                     <div class="row mb-3">
@@ -109,16 +91,16 @@
 
                                                 <div class="progress"
                                                     style="
-                    height: 5px;
-                    border-radius: 999px;
-                    background: #e9ecef;
-                ">
+                                                            height: 5px;
+                                                            border-radius: 999px;
+                                                            background: #e9ecef;
+                                                        ">
 
                                                     <div id="password-strength-bar" class="progress-bar bg-danger"
                                                         style="
-                        width: 0%;
-                        transition: all .25s ease;
-                    ">
+                                                            width: 0%;
+                                                            transition: all .25s ease;
+                                                        ">
                                                     </div>
 
                                                 </div>

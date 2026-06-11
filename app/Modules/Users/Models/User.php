@@ -3,7 +3,6 @@
 namespace App\Modules\Users\Models;
 
 use App\Modules\AccessLevels\Models\AccessLevel;
-use App\Modules\Centers\Models\Center;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,6 +25,8 @@ class User extends Authenticatable
         'center_id',
         'authenticable_type',
         'authenticable_id',
+        'active',
+        'cpf',
     ];
     
     public function getAuthIdentifierName()

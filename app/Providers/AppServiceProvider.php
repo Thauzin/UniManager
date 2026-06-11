@@ -24,17 +24,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // $notifications = Notification::whereNull('viewed_at')->get();
-        // $access_levels = AccessLevel::get();
+        $access_levels = AccessLevel::get();
 
         // View::share('notifications', $notifications);
-        // View::share('access_levels', $access_levels);
+        View::share('access_levels', $access_levels);
 
-        // Blade::if('access', function ($levels) {
+        Blade::if('access', function ($levels) {
 
-        //     $levels = is_array($levels) ? $levels : [$levels];
+            $levels = is_array($levels) ? $levels : [$levels];
 
-        //     return auth()->check()
-        //     && in_array(auth()->user()->access_level_id, $levels);
-        // });
+            return auth()->check()
+            && in_array(auth()->user()->access_level_id, $levels);
+        });
     }
 }

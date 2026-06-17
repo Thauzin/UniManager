@@ -1,15 +1,14 @@
 <?php
-namespace App\Modules\Users\Http\Controllers;
+namespace App\Modules\Configs\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Users\Http\Requests\UserRequest;
+use App\Modules\Models\Configs;
 use App\Modules\Users\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
-class UserController extends Controller
+class ConfigsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +17,9 @@ class UserController extends Controller
     {
         try {
 
-            $users = User::with('access_level')->latest()->paginate(40);
+            $user = $user = auth()->user();
 
-            return view('users::index', compact('users'));
+            return view('configs::index', compact('user'));
 
         } catch (\Throwable $e) {
 
@@ -39,7 +38,8 @@ class UserController extends Controller
     public function create()
     {
         try {
-            return view('users::create');
+
+            return view('configs::create');
 
         } catch (\Throwable $e) {
 
@@ -55,23 +55,24 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
         DB::beginTransaction();
 
         try {
 
-            $data = $request->validated();
+            $data = $request->all();
 
-            $data['password'] = Hash::make($data['password']);
-
-            $user = User::create($data);
+            $item = Configs::create($data);
 
             DB::commit();
 
             return redirect()
-                ->route('users.index')
-                ->with('success', 'Registro criado com sucesso.');
+                ->route('configs.index')
+                ->with(
+                    'success',
+                    'Registro criado com sucesso.'
+                );
 
         } catch (\Throwable $e) {
 
@@ -81,7 +82,10 @@ class UserController extends Controller
 
             return back()
                 ->withInput()
-                ->with('error', 'Erro ao criar registro.');
+                ->with(
+                    'error',
+                    'Erro ao criar registro.'
+                );
         }
     }
 
@@ -92,9 +96,9 @@ class UserController extends Controller
     {
         try {
 
-            $user = User::findOrFail($id);
+            $item = Configs::findOrFail($id);
 
-            return view('users::show', compact('user'));
+            return view('configs::show', compact('item'));
 
         } catch (\Throwable $e) {
 
@@ -114,9 +118,9 @@ class UserController extends Controller
     {
         try {
 
-            $user = User::with('access_level', 'center')->findOrFail($id);
-            
-            return view('users::create', compact('user'));
+            $item = Configs::findOrFail($id);
+
+            return view('configs::edit', compact('item'));
 
         } catch (\Throwable $e) {
 
@@ -132,7 +136,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         DB::beginTransaction();
 
@@ -140,50 +144,7 @@ class UserController extends Controller
 
             $user = User::findOrFail($id);
 
-            $data = $request->validated();
-
-            if ($request->filled('password')) {
-                $data['password'] = Hash::make($request->password);
-            } else {
-                unset($data['password']);
-            }
-
-            $user->update($data);
-
-            DB::commit();
-
-            return redirect()
-                ->route('users.index')
-                ->with(
-                    'success',
-                    'Registro atualizado com sucesso.'
-                );
-
-        } catch (\Throwable $e) {
-
-            DB::rollBack();
-
-            Log::error($e);
-
-            return back()
-                ->withInput()
-                ->with(
-                    'error',
-                    'Erro ao atualizar registro.'
-                );
-        }
-    }
-
-    public function updateByUser(Request $request, $id)
-    {
-        DB::beginTransaction();
-
-        try {
-
-            $user = User::findOrFail($id);
-
-            $data = $request->only(['name', 'email', 'phone']);
-            info($data);
+            $data = $request;
 
             $user->update($data);
 
@@ -193,7 +154,7 @@ class UserController extends Controller
                 ->route('configs.index')
                 ->with(
                     'success',
-                    'Registro atualizado com sucesso.'
+                    'Perfil atualizado com sucesso.'
                 );
 
         } catch (\Throwable $e) {
@@ -206,7 +167,7 @@ class UserController extends Controller
                 ->withInput()
                 ->with(
                     'error',
-                    'Erro ao atualizar registro.'
+                    'Erro ao atualizar perfil.'
                 );
         }
     }
@@ -220,14 +181,14 @@ class UserController extends Controller
 
         try {
 
-            $user = User::findOrFail($id);
+            $item = Configs::findOrFail($id);
 
-            $user->delete();
+            $item->delete();
 
             DB::commit();
 
             return redirect()
-                ->route('users.index')
+                ->route('configs.index')
                 ->with(
                     'success',
                     'Registro removido com sucesso.'

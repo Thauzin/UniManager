@@ -22,7 +22,8 @@ class UserRequest extends FormRequest
             'password'           => [$this->isMethod('post') ? 'required' : 'nullable', 'confirmed', 'max:30', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
             'authenticable_type' => 'nullable|string',
             'authenticable_id'   => 'nullable|integer',
-            'email'              => ['required', 'email', 'max:255', Rule::unique('users', 'email') ->ignore($this->user) ->whereNull('deleted_at'),
+            'phone'              => 'nullable',
+            'email'              => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->user)->whereNull('deleted_at'),
             ],
         ];
     }

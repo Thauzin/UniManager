@@ -1,0 +1,11 @@
+{
+    "name": "Configs",
+    "alias": "configs",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Modules\\Configs\\Providers\\ConfigsServiceProvider"
+    ],
+    "files": []
+}

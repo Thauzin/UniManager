@@ -27,6 +27,7 @@ class User extends Authenticatable
         'authenticable_id',
         'active',
         'cpf',
+        'phone',
     ];
     
     public function getAuthIdentifierName()

@@ -12,34 +12,8 @@ Route::get('/', function () {
 
     $user = auth()->user();
 
-    if ($user->access_level_id == 1) {
-
-        $firstInventory = Inventory::first();
-
-        if ($firstInventory) {
-
-            return redirect()->route(
-                'inventories.index',
-                [
-                    'center' => $firstInventory->center_id,
-                ]
-            );
-        }
-
+    if ($user) {
         return redirect()->route('users.index');
-    }
-
-    if ($user->access_level_id == 2) {
-
-        if ($user->center) {
-
-            return redirect()->route(
-                'inventories.index',
-                [
-                    'center' => $user->center->id,
-                ]
-            );
-        }
     }
 
     return redirect()->route('login');

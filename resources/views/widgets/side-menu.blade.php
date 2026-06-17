@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../Aluno/configuracoes.html" class="nav-link">
+                    <a href="{{ route('configs.index') }}" class="nav-link">
                         <i class="nav-icon bi bi-gear text-dark"></i>
                         <p class="text-dark">Configurações</p>
                     </a>

@@ -3,6 +3,7 @@ namespace App\Providers;
 
 use App\Modules\AccessLevels\Models\AccessLevel;
 use App\Modules\Centers\Models\Center;
+use App\Modules\CourseAreas\Models\CourseArea;
 use App\Modules\Notifications\Models\Notification;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
@@ -23,10 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $notifications = Notification::whereNull('viewed_at')->get();
+        $course_areas = CourseArea::get();
         $access_levels = AccessLevel::get();
 
-        // View::share('notifications', $notifications);
+        View::share('course_areas', $course_areas);
         View::share('access_levels', $access_levels);
 
         Blade::if('access', function ($levels) {

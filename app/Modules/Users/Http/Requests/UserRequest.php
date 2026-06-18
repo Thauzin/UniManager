@@ -23,6 +23,7 @@ class UserRequest extends FormRequest
             'authenticable_type' => 'nullable|string',
             'authenticable_id'   => 'nullable|integer',
             'phone'              => 'nullable',
+            'course_area_id'     => 'nullable',
             'email'              => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->user)->whereNull('deleted_at'),
             ],
         ];

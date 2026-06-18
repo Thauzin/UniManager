@@ -1,14 +1,15 @@
 <?php
-namespace App\Modules\Configs\Http\Controllers;
+
+namespace App\Modules\CourseAreas\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Models\Configs;
-use App\Modules\Users\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class ConfigsController extends Controller
+use App\Modules\Models\CourseAreas;
+
+class CourseAreasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +18,9 @@ class ConfigsController extends Controller
     {
         try {
 
-            $user = $user = auth()->user()->load('course_area');
+            $items = CourseAreas::latest()->paginate(10);
 
-            return view('configs::index', compact('user'));
+            return view('courseareas::index', compact('items'));
 
         } catch (\Throwable $e) {
 
@@ -39,7 +40,7 @@ class ConfigsController extends Controller
     {
         try {
 
-            return view('configs::create');
+            return view('courseareas::create');
 
         } catch (\Throwable $e) {
 
@@ -63,12 +64,12 @@ class ConfigsController extends Controller
 
             $data = $request->all();
 
-            $item = Configs::create($data);
+            $item = CourseAreas::create($data);
 
             DB::commit();
 
             return redirect()
-                ->route('configs.index')
+                ->route('courseareas.index')
                 ->with(
                     'success',
                     'Registro criado com sucesso.'
@@ -96,9 +97,9 @@ class ConfigsController extends Controller
     {
         try {
 
-            $item = Configs::findOrFail($id);
+            $item = CourseAreas::findOrFail($id);
 
-            return view('configs::show', compact('item'));
+            return view('courseareas::show', compact('item'));
 
         } catch (\Throwable $e) {
 
@@ -118,9 +119,9 @@ class ConfigsController extends Controller
     {
         try {
 
-            $item = Configs::findOrFail($id);
+            $item = CourseAreas::findOrFail($id);
 
-            return view('configs::edit', compact('item'));
+            return view('courseareas::edit', compact('item'));
 
         } catch (\Throwable $e) {
 
@@ -142,19 +143,19 @@ class ConfigsController extends Controller
 
         try {
 
-            $user = User::findOrFail($id);
+            $item = CourseAreas::findOrFail($id);
 
-            $data = $request;
+            $data = $request->all();
 
-            $user->update($data);
+            $item->update($data);
 
             DB::commit();
 
             return redirect()
-                ->route('configs.index')
+                ->route('courseareas.index')
                 ->with(
                     'success',
-                    'Perfil atualizado com sucesso.'
+                    'Registro atualizado com sucesso.'
                 );
 
         } catch (\Throwable $e) {
@@ -167,7 +168,7 @@ class ConfigsController extends Controller
                 ->withInput()
                 ->with(
                     'error',
-                    'Erro ao atualizar perfil.'
+                    'Erro ao atualizar registro.'
                 );
         }
     }
@@ -181,14 +182,14 @@ class ConfigsController extends Controller
 
         try {
 
-            $item = Configs::findOrFail($id);
+            $item = CourseAreas::findOrFail($id);
 
             $item->delete();
 
             DB::commit();
 
             return redirect()
-                ->route('configs.index')
+                ->route('courseareas.index')
                 ->with(
                     'success',
                     'Registro removido com sucesso.'

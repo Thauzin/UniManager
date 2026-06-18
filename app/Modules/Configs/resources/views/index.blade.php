@@ -74,7 +74,7 @@
 
                             {{-- Aluno: mostra curso e período | Professor: mostra apenas área --}}
                             <div class="row g-3 mb-4">
-                                @if ($user->access_level->id === 2)
+                                @access(2)
                                     {{-- ALUNO --}}
                                     <div class="col-md-6">
                                         <label for="curso" class="form-label">Curso</label>
@@ -94,19 +94,20 @@
                                             <span id="periodo-msg"></span>
                                         </div>
                                     </div>
-                                @elseif($user->access_level->id === 3)
+                                @endaccess
+                                @access(3)
                                     {{-- PROFESSOR --}}
                                     <div class="col-md-6">
-                                        <label for="area" class="form-label">Área</label>
-                                        <input type="text" class="form-control" id="area" value=""
-                                            placeholder="Ex: Exatas, Humanas..." disabled />
-                                        <div class="field-feedback" id="area-err">
+                                        <label for="telefone" class="form-label">Área de Atuação</label>
+                                        <input type="tel" class="form-control" id="telefone" name="phone"
+                                            value="{{ $user->course_area->name }}" disabled readonly/>
+                                        <div class="field-feedback" id="telefone-err">
                                             <i class="bi bi-exclamation-circle-fill"></i>
-                                            <span id="area-msg"></span>
+                                            <span id="telefone-msg"></span>
                                         </div>
                                     </div>
-                                @endif
-                            </div>
+                                </div>
+                            @endaccess
                             <div class="col-sm-6 text-start">
                                 <button type="submit" form="form" class="btn btn-dark px-4">
                                     Salvar Alterações

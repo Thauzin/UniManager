@@ -6,5 +6,6 @@
     "ProductCategories": true,
     "Activites": true,
     "Courses": true,
-    "Configs": true
+    "Configs": true,
+    "CourseAreas": true
 }

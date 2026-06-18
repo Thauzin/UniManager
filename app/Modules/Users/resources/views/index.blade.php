@@ -291,7 +291,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">
-                                    Tipo de Acesso
+                                    Nível de Acesso
                                 </label>
 
                                 <select name="access_level_id" id="access_level_id" class="form-select custom-input">
@@ -302,6 +302,20 @@
                                         </option>
                                     @endforeach
 
+                                </select>
+                            </div>
+                            <div class="mb-3" id="courseAreaField" style="display: none;">
+                                <label class="form-label fw-semibold">
+                                    Área do Curso
+                                </label>
+
+                                <select name="course_area_id" id="course_area_id" class="form-select custom-input">
+                                    <option value="">Selecione uma área</option>
+                                    @foreach ($course_areas as $course_area)
+                                        <option value="{{ $course_area->id }}">
+                                            {{ $course_area->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -377,7 +391,6 @@
             document.getElementById('password_confirmation').placeholder =
                 'Confirmar senha';
 
-            // Reset da barra de força
             strengthBar.style.width = '0%';
             strengthBar.className = 'progress-bar bg-danger';
 
@@ -385,6 +398,8 @@
 
             feedback.innerHTML =
                 'A senha deve conter: 8 caracteres, maiúscula, minúscula, número e símbolo.';
+
+            toggleCourseAreaField();
 
             bootstrap.Modal
                 .getOrCreateInstance(document.getElementById('userModal'))
@@ -415,6 +430,9 @@
             document.getElementById('access_level_id').value =
                 user.access_level_id ?? '';
 
+            document.getElementById('course_area_id').value =
+                user.course_area_id ?? ''; // <-- adicionado
+
             document.getElementById('password').value = '';
 
             document.getElementById('password_confirmation').value = '';
@@ -431,7 +449,6 @@
             document.getElementById('password_confirmation').placeholder =
                 'Confirme apenas para alterar';
 
-            // Reset da barra de força
             strengthBar.style.width = '0%';
             strengthBar.className = 'progress-bar bg-danger';
 
@@ -439,6 +456,8 @@
 
             feedback.innerHTML =
                 'A senha deve conter: 8 caracteres, maiúscula, minúscula, número e símbolo.';
+
+            toggleCourseAreaField();
 
             bootstrap.Modal
                 .getOrCreateInstance(document.getElementById('userModal'))
@@ -553,7 +572,22 @@
                 }
 
             });
+            const accessLevelSelect = document.getElementById('access_level_id');
+            const courseAreaField = document.getElementById('courseAreaField');
+            const courseAreaSelect = document.getElementById('course_area_id');
 
+            function toggleCourseAreaField() {
+                if (accessLevelSelect.value == 3) { // Professor
+                    courseAreaField.style.display = 'block';
+                } else {
+                    courseAreaField.style.display = 'none';
+                    courseAreaSelect.value = '';
+                }
+            }
+
+            if (accessLevelSelect) {
+                accessLevelSelect.addEventListener('change', toggleCourseAreaField);
+            }
         }
     </script>
 

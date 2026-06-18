@@ -7,7 +7,7 @@
         </a>
     </div>
 
-    @access(1)
+    {{-- @access(1) --}}
     <div class="sidebar-wrapper bg-light">
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../Aluno/solicitacao.html" class="nav-link">
+                    <a href="{{ route('studentrequests.index') }}" class="nav-link">
                         <i class="nav-icon bi bi-file-earmark-text text-dark"></i>
                         <p class="text-dark">Solicitações</p>
                     </a>
@@ -50,8 +50,14 @@
                         <p class="text-dark">Configurações</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('users.index') }}" class="nav-link">
+                        <i class="nav-icon bi bi-people-fill text-dark"></i>
+                        <p class="text-dark">Usuários</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
-    @endaccess
+    {{-- @endaccess --}}
 </aside>

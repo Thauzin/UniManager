@@ -1,16 +1,15 @@
 <?php
-namespace App\Modules\Courses\Http\Controllers;
+
+namespace App\Modules\Students\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Courses\Http\Requests\CourseRequest;
-use App\Modules\Courses\Models\Course;
-use App\Modules\Courses\Models\Group;
-use App\Modules\Users\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class CoursesController extends Controller
+use App\Modules\Models\Students;
+
+class StudentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +18,9 @@ class CoursesController extends Controller
     {
         try {
 
-            $courses = Course::latest()->paginate(10);
+            $items = Students::latest()->paginate(10);
 
-            $groups = Group::with('course', 'user')->get();
-
-            return view('courses::index', compact('courses', 'groups'));
+            return view('students::index', compact('items'));
 
         } catch (\Throwable $e) {
 
@@ -43,7 +40,7 @@ class CoursesController extends Controller
     {
         try {
 
-            return view('courses::create');
+            return view('students::create');
 
         } catch (\Throwable $e) {
 
@@ -56,57 +53,10 @@ class CoursesController extends Controller
         }
     }
 
-    public function addStudent(Request $request, $id)
-    {
-        try {
-            $student = User::findOrFail($request->student_id);
-
-            $student->update(['group_id' => $id]);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Aluno adicionado com sucesso.',
-            ]);
-
-        } catch (\Throwable $e) {
-
-            Log::error($e);
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Erro ao adicionar aluno.',
-            ], 500);
-        }
-    }
-
-    public function removeStudent(Request $request, $id)
-    {
-        try {
-
-            $student = User::findOrFail($request->student_id);
-
-            $student->update(['group_id' => null]);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Aluno removido com sucesso.',
-            ]);
-
-        } catch (\Throwable $e) {
-
-            Log::error($e);
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Erro ao remover aluno.',
-            ], 500);
-        }
-    }
-
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CourseRequest $request)
+    public function store(Request $request)
     {
         DB::beginTransaction();
 
@@ -114,12 +64,12 @@ class CoursesController extends Controller
 
             $data = $request->all();
 
-            $group = Group::create($data);
+            $item = Students::create($data);
 
             DB::commit();
 
             return redirect()
-                ->route('courses.index')
+                ->route('students.index')
                 ->with(
                     'success',
                     'Registro criado com sucesso.'
@@ -147,9 +97,9 @@ class CoursesController extends Controller
     {
         try {
 
-            $course = Courses::findOrFail($id);
+            $item = Students::findOrFail($id);
 
-            return view('courses::show', compact('course'));
+            return view('students::show', compact('item'));
 
         } catch (\Throwable $e) {
 
@@ -169,9 +119,9 @@ class CoursesController extends Controller
     {
         try {
 
-            $group = Group::findOrFail($id);
+            $item = Students::findOrFail($id);
 
-            return view('courses::edit', compact('group'));
+            return view('students::edit', compact('item'));
 
         } catch (\Throwable $e) {
 
@@ -193,16 +143,16 @@ class CoursesController extends Controller
 
         try {
 
-            $group = Group::findOrFail($id);
+            $item = Students::findOrFail($id);
 
             $data = $request->all();
 
-            $group->update($data);
+            $item->update($data);
 
             DB::commit();
 
             return redirect()
-                ->route('courses.index')
+                ->route('students.index')
                 ->with(
                     'success',
                     'Registro atualizado com sucesso.'
@@ -232,14 +182,14 @@ class CoursesController extends Controller
 
         try {
 
-            $group = Group::findOrFail($id);
+            $item = Students::findOrFail($id);
 
-            $group->delete();
+            $item->delete();
 
             DB::commit();
 
             return redirect()
-                ->route('courses.index')
+                ->route('students.index')
                 ->with(
                     'success',
                     'Registro removido com sucesso.'

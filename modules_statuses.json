@@ -7,5 +7,6 @@
     "Activites": true,
     "Courses": true,
     "Configs": true,
-    "CourseAreas": true
+    "CourseAreas": true,
+    "Students": true
 }

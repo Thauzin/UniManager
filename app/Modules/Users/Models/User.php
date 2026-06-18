@@ -4,6 +4,7 @@ namespace App\Modules\Users\Models;
 
 use App\Modules\AccessLevels\Models\AccessLevel;
 use App\Modules\CourseAreas\Models\CourseArea;
+use App\Modules\Courses\Models\Group;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -30,6 +31,7 @@ class User extends Authenticatable
         'cpf',
         'phone',
         'course_area_id',
+        'group_id',
     ];
     
     public function getAuthIdentifierName()
@@ -49,6 +51,11 @@ class User extends Authenticatable
     public function access_level()
     {
         return $this->belongsTo(AccessLevel::class);
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
     }
 
     public function course_area()

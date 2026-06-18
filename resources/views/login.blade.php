@@ -50,15 +50,6 @@
                                 <button type="submit" class="btn btn-primary">Entrar</button>
                             </div>
                         </div>
-                        <div class="mt-3 text-center">
-                            <p class="mb-1">
-                                <a class="text-decoration-none" href="forgot-password.html">Primeiro Acesso</a>
-                            </p>
-                            <p class="mb-0">
-                                <a class="text-decoration-none" href="register.html" class="text-center">Esqueci minha
-                                    senha</a>
-                            </p>
-                        </div>
                         <!-- /.col -->
                     </div>
                     <!--end::Row-->
